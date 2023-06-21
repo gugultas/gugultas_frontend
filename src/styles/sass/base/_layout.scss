@@ -1,0 +1,133 @@
+.container {
+  margin: 5rem 15rem;
+  padding: 0 1rem;
+  padding-bottom: 3rem;
+  background-color: white;
+  box-shadow: var(--shadow-light);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 5px;
+
+  @include respond(tab-land){
+    margin: 3rem 6rem;
+    padding: 2rem 1rem 2rem 1rem;
+  }
+
+  @include respond(tab-port){
+    margin: 0;
+    padding: 1rem;
+  }
+}
+
+.landing-layout {
+  margin: 0;
+  align-items: center;
+  text-align: center;
+  background-color: var(--color-grey-light-1);
+  min-height: 100vh;
+}
+
+.profile_layout {
+  margin: 8rem 20rem;
+  background-color: var(--color-grey-light-2);
+  box-shadow: var(--shadow-light);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 3px;
+  padding: 2rem;
+
+  @include respond(tab-land) {
+    margin: 4rem 11rem;
+    padding: 1rem;
+    box-shadow: none;
+    border-radius: 9px;
+  }
+
+  @include respond(tab-port) {
+    margin: 0;
+    margin-top: 5rem;
+    padding: 2rem;
+    box-shadow: none;
+  }
+
+  @include respond(phone) {
+    margin: 0;
+    margin-top: 5rem;
+    padding: 5px;
+  }
+}
+
+.form-page_layout {
+  margin: 8rem 20rem;
+  background-image: linear-gradient(
+    to right bottom,
+    rgba($color-grey-light-1, 0.85),
+    rgba($landing-bg-image-color-1, 0.85)
+  ),url("../../../assets/img/form-bg-image.jpg");
+  background-size: cover;
+  background-position: top;
+  position: relative;
+  box-shadow: var(--shadow-light);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 3px;
+  padding: 2rem;
+
+  @include respond(tab-land) {
+    margin: 4rem 11rem;
+    padding: 1rem;
+    box-shadow: none;
+    border-radius: 9px;
+  }
+
+  @include respond(tab-port) {
+    margin: 0;
+    margin-top: 5rem;
+    padding: 2rem;
+    box-shadow: none;
+  }
+
+  @include respond(phone) {
+    margin: 0;
+    margin-top: 5rem;
+    padding: 5px;
+  }
+}
+
+.main_page_layout {
+  margin: 11rem;
+  background-color: transparent;
+  // box-shadow: var(--shadow-light);
+  // display: flex;
+  // flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 3px;
+  padding: 2rem 4rem;
+
+  @include respond(tab-land) {
+    margin: 4rem 3rem;
+    padding: 2rem;
+    box-shadow: none;
+    border-radius: 9px;
+  }
+
+  @include respond(tab-port) {
+    margin: 0;
+    padding: 2rem;
+    box-shadow: none;
+  }
+
+  @include respond(phone) {
+    margin: 0;
+    padding: 1rem;
+  }
+}
