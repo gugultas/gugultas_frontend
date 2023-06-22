@@ -9,12 +9,14 @@ import { useSelector } from "react-redux";
 import { selectCurrentUsername } from "../../features/auth/authSlice";
 import LikeCommentComp from "../like/LikeCommentComp";
 import EditComment from "./EditComment";
-import { BASE_URL, photosApiUrl } from "../../config/urls";
+import { checkImageExist } from "../../validation/conditions/checkImageExist";
 
 const SingleComment = ({ comment }) => {
   moment.locale("tr");
-  const imageUrl =
-    comment?.userImage && `${BASE_URL}${photosApiUrl}/${comment?.userImage}`;
+  const imageUrl = checkImageExist(
+    comment?.userImageId,
+    comment?.userImageType
+  );
   const alignItems = {
     display: "flex",
     justifyContent: "center",
@@ -47,7 +49,7 @@ const SingleComment = ({ comment }) => {
       >
         <Avatar
           src={imageUrl}
-          sx={{ width: { xs: 35, md: 56 }, height: { xs: 35, md: 56 } }}
+          sx={{ width: { xs: 30, md: 45 }, height: { xs: 30, md: 45 } }}
         />
         <Stack sx={{ textAlign: "left", alignItems: "flex-start" }}>
           <h6 className="heading-tertiary">{comment?.username}</h6>

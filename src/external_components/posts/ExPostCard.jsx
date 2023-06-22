@@ -22,12 +22,16 @@ import { useSelector } from "react-redux";
 import { selectCurrentUserRoles } from "../../features/auth/authSlice";
 import { isEditor } from "../../validation/conditions/checkRole";
 import { BASE_URL, photosApiUrl } from "../../config/urls";
+import { checkImageExist } from "../../validation/conditions/checkImageExist";
 
 export default function ExPostCard({ post }) {
+  console.log(post);
   const userRoles = useSelector(selectCurrentUserRoles);
   const postImage = post?.image && `${BASE_URL}${photosApiUrl}/${post?.image}`;
-  const userImage =
-    post?.profileImage && `${BASE_URL}${photosApiUrl}/${post?.profileImage}`;
+  const userImage = checkImageExist(
+    post?.profileImageId,
+    post?.profileImageType
+  );
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -209,7 +213,7 @@ export default function ExPostCard({ post }) {
             gridArea: "footer",
             display: "flex",
             justifyContent: "space-between",
-            pt: .7,
+            pt: 0.7,
             pb: 2,
             color: "black",
           }}

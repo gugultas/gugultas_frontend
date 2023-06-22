@@ -1,9 +1,9 @@
 import { Avatar, Grid, Stack, Typography } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
-import { BASE_URL, photosApiUrl } from "../../config/urls";
 import { useGetAuhorsForCardQuery } from "../../features/user/usersSlice";
 import { stringAvatar } from "../../utils/CustomProfileImage";
+import { checkImageExist } from "../../validation/conditions/checkImageExist";
 
 const AuthorsAvatar = () => {
   const { data } = useGetAuhorsForCardQuery();
@@ -20,7 +20,7 @@ const AuthorsAvatar = () => {
               sx={{ m: 1 }}
             >
               <Avatar
-                src={author?.image && `${BASE_URL}${photosApiUrl}/${author?.image}`}
+                src={checkImageExist(author?.imageId, author?.imageType)}
                 {...stringAvatar(author?.username.toUpperCase())}
                 sx={{
                   width: 50,
@@ -33,7 +33,10 @@ const AuthorsAvatar = () => {
                   },
                 }}
               />
-              <Typography variant="body2" fontWeight={800} > {author?.username} </Typography>
+              <Typography variant="body2" fontWeight={800}>
+                {" "}
+                {author?.username}{" "}
+              </Typography>
             </Stack>
           </Link>
         </Grid>

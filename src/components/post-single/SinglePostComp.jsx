@@ -17,16 +17,18 @@ import CommentsList from "../comment/CommentsList";
 import { selectCurrentUsername } from "../../features/auth/authSlice";
 import { useDeactivatePostMutation } from "../../features/posts/postSlice";
 import { parseHtmlText } from "../../utils/htmlParseConfig";
-import { BASE_URL, photosApiUrl } from "../../config/urls";
 import { stringAvatar } from "../../utils/CustomProfileImage";
+import { checkImageExist } from "../../validation/conditions/checkImageExist";
 
 const SinglePostComp = ({ post, comments }) => {
   const theme = useTheme();
   const navigate = useNavigate();
   const username = useSelector(selectCurrentUsername);
   const [deletePost, { isLoading }] = useDeactivatePostMutation();
-  const imageUrl =
-    post?.profileImage && `${BASE_URL}${photosApiUrl}/${post?.profileImage}`;
+  const imageUrl = checkImageExist(
+    post?.profileImageId,
+    post?.profileImageType
+  );
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();

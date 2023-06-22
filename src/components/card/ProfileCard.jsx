@@ -4,14 +4,14 @@ import { Avatar, Box } from "@mui/material";
 
 import "./../../styles/sass/main.scss";
 
-import { BASE_URL, photosApiUrl } from "../../config/urls";
 import { stringAvatar } from "../../utils/CustomProfileImage";
+import { checkImageExist } from "../../validation/conditions/checkImageExist";
 
 const ProfileCard = ({ author, bgImage }) => {
-  const photoImage =  author?.image &&`${BASE_URL}${photosApiUrl}/${author?.image}`;
+  const photoImage = checkImageExist(author?.imageId, author?.imageType);
 
   const bgStyle = {
-    backgroundImage: `url(${author?.image ? photoImage : bgImage})`,
+    backgroundImage: `url(${photoImage || bgImage})`,
     backgroundColor: "grey",
   };
 
