@@ -10,6 +10,7 @@ import { selectCurrentUsername } from "../../features/auth/authSlice";
 import LikeCommentComp from "../like/LikeCommentComp";
 import EditComment from "./EditComment";
 import { checkImageExist } from "../../validation/conditions/checkImageExist";
+import { Link } from "react-router-dom";
 
 const SingleComment = ({ comment }) => {
   moment.locale("tr");
@@ -52,7 +53,9 @@ const SingleComment = ({ comment }) => {
           sx={{ width: { xs: 30, md: 45 }, height: { xs: 30, md: 45 } }}
         />
         <Stack sx={{ textAlign: "left", alignItems: "flex-start" }}>
-          <h6 className="heading-tertiary">{comment?.username}</h6>
+          <Link to={`/users/` + comment?.username}>
+            <h6 className="heading-tertiary">{comment?.username}</h6>
+          </Link>
           <p className="stats-text">
             {moment(comment?.createDateTime).fromNow()}
           </p>

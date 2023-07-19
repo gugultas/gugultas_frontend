@@ -1,5 +1,18 @@
 import React from "react";
-import { Avatar, Box, Divider, Stack, Tooltip, useTheme } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Divider,
+  IconButton,
+  Stack,
+  Tooltip,
+  Typography,
+  useTheme,
+} from "@mui/material";
+import { useSelector } from "react-redux";
+import { TfiPencilAlt2 } from "react-icons/tfi";
+import { BsEyeglasses } from "react-icons/bs";
+import { RiAdminLine } from "react-icons/ri";
 
 import "./../../styles/sass/main.scss";
 import { BASE_URL, photosApiUrl } from "../../config/urls";
@@ -12,9 +25,14 @@ import {
 } from "react-icons/bs";
 import SendActivationRequest from "../auth/SendActivationRequest";
 import { selectCurrentUsername } from "../../features/auth/authSlice";
-import { useSelector } from "react-redux";
+import {
+  isAdmin,
+  isAuthor,
+  isEditor,
+} from "../../validation/conditions/checkRole";
 
 const ProfileBox = ({ user }) => {
+  console.log(user)
   const loggedUsername = useSelector(selectCurrentUsername);
   const theme = useTheme();
   const imageUrl = user?.image && `${BASE_URL}${photosApiUrl}/${user?.image}`;
@@ -27,17 +45,40 @@ const ProfileBox = ({ user }) => {
             src={imageUrl}
             sx={{
               width: {
-                xs: 90,
+                xs: 80,
                 lg: 120,
               },
               height: {
-                xs: 90,
+                xs: 80,
                 lg: 120,
               },
             }}
           />
           <Box sx={{ alignItems: "center", textAlign: "center" }}>
-            <h3 className="heading-secondary--profile">{user?.username}</h3>
+            <Stack direction="row" alignItems="center" spacing={0.5}>
+              <h3 className="heading-secondary--profile">{user?.username}</h3>
+              {isAdmin(user?.roles) && (
+                <Tooltip title={<Typography> Admin </Typography>} arrow>
+                  <IconButton>
+                    <RiAdminLine color="#0d9f0b" size={15} />
+                  </IconButton>
+                </Tooltip>
+              )}
+              {isEditor(user?.roles) && (
+                <Tooltip title={<Typography> Editor </Typography>}>
+                  <IconButton>
+                    <BsEyeglasses color="#0d9f0b" size={15} />
+                  </IconButton>
+                </Tooltip>
+              )}
+              {isAuthor(user?.roles) && (
+                <Tooltip title={<Typography> Yazar </Typography>}>
+                  <IconButton>
+                    <TfiPencilAlt2 color="#0d9f0b" size={15} />
+                  </IconButton>
+                </Tooltip>
+              )}
+            </Stack>
             {(user?.firstName || user?.lastName) && (
               <h5
                 className="heading-tertiary"

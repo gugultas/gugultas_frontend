@@ -25,7 +25,6 @@ import { BASE_URL, photosApiUrl } from "../../config/urls";
 import { checkImageExist } from "../../validation/conditions/checkImageExist";
 
 export default function ExPostCard({ post }) {
-  console.log(post);
   const userRoles = useSelector(selectCurrentUserRoles);
   const postImage = post?.image && `${BASE_URL}${photosApiUrl}/${post?.image}`;
   const userImage = checkImageExist(

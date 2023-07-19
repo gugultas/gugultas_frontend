@@ -60,6 +60,10 @@ export const postsApiSlice = apiSlice.injectEndpoints({
           .get("/likes/likedUsersByPost/" + responseData?.id)
           .then((resp) => (responseData.likes = resp?.data))
           .catch((err) => console.log(err));
+        await axiosPublic
+          .get("/posts/getLastFivePostsByAuthor/" + responseData?.username)
+          .then((resp) => (responseData.lastFivePosts = resp?.data))
+          .catch((e) => console.log(e));
         return responseData;
       },
       transformErrorResponse: (responseData) => {

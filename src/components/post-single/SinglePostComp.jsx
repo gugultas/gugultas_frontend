@@ -19,6 +19,8 @@ import { useDeactivatePostMutation } from "../../features/posts/postSlice";
 import { parseHtmlText } from "../../utils/htmlParseConfig";
 import { stringAvatar } from "../../utils/CustomProfileImage";
 import { checkImageExist } from "../../validation/conditions/checkImageExist";
+import LastFivePostsOfAuthorComp from "../post-list/LastFivePostsOfAuthorComp";
+import SharePost from "../share/SharePost";
 
 const SinglePostComp = ({ post, comments }) => {
   const theme = useTheme();
@@ -112,6 +114,10 @@ const SinglePostComp = ({ post, comments }) => {
           </Link>
         </Stack>
       </Box>
+
+      <LastFivePostsOfAuthorComp posts={post?.lastFivePosts} />
+
+      <SharePost title={post?.title} />
 
       <PostFooter
         postId={post?.id}

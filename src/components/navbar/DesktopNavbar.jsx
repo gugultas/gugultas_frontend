@@ -3,7 +3,8 @@ import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { BsDiagram3 } from "react-icons/bs";
 import { AiOutlineLogout } from "react-icons/ai";
-import { useMediaQuery, useTheme } from "@mui/material";
+import { RxHamburgerMenu } from "react-icons/rx";
+import { IconButton, useMediaQuery, useTheme } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
@@ -40,6 +41,8 @@ const pages = [
   { id: 1, pageName: "/contact-us", navName: "İletişim" },
 ];
 
+const ITEM_HEIGHT = 48;
+
 const DesktopNavbar = () => {
   const navigate = useNavigate();
   const { categoryName } = useParams();
@@ -52,7 +55,14 @@ const DesktopNavbar = () => {
   const matches = useMediaQuery(theme.breakpoints.up("md"));
 
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   const signOut = useLogout();
 
   const { data: categories } = useGetCategoriesQuery();
@@ -64,8 +74,12 @@ const DesktopNavbar = () => {
   );
 
   const items = categories && [...categories];
-  items?.sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0));
-
+  items?.sort((a, b) =>
+    a.postCounts < b.postCounts ? 1 : b.postCounts < a.postCounts ? -1 : 0
+  );
+  const showedItems = items?.slice(0, 7);
+  const listItems = items?.slice(7, items.length);
+  // console.log(listItems);
   const imageUrl = image && `${BASE_URL}${photosApiUrl}/${image}`;
 
   const handleOpenUserMenu = (event) => {
@@ -107,7 +121,7 @@ const DesktopNavbar = () => {
           sx={{
             p: {
               lg: "2rem 12rem",
-              md: "2rem 3rem",
+              md: "2rem 2rem",
             },
           }}
         >
@@ -281,12 +295,13 @@ const DesktopNavbar = () => {
         </Toolbar>
         <Toolbar
           disableGutters
+          variant="dense"
           sx={{
             m: {
               lg: "0 12rem",
-              md: "0 3rem",
+              md: "0 2rem",
             },
-            bgcolor: "white",
+            bgcolor: theme.palette.primary.main,
           }}
         >
           <Box
@@ -300,7 +315,7 @@ const DesktopNavbar = () => {
               flexWrap: "wrap",
             }}
           >
-            {items?.map((category) => (
+            {showedItems?.map((category) => (
               <Button
                 key={category?.id}
                 component={NavLink}
@@ -308,34 +323,90 @@ const DesktopNavbar = () => {
                 sx={{
                   borderRadius: 0,
                   mx: 1,
-                  borderRight: "2px solid black",
+                  borderRight: "1px solid white",
                   my: 1,
-                  px: 0,
+                  px: 1,
                   fontSize: "1rem",
                   fontWeight: "900",
                   fontFamily: '"Montserrat", sans-serif',
-                  color: theme.palette.primary.dark,
+                  color: "white",
                   display: "block",
                   "&.active": {
                     color: theme.palette.primary.light,
-                    bgcolor: theme.palette.primary.dark,
+                    bgcolor: "white",
                   },
                   ":hover": {
-                    color: theme.palette.primary.dark,
-                    bgcolor: theme.palette.primary.light,
-                    borderBottom: "1px solid black",
-                    borderRight: "2px solid black",
+                    color: "#ccc",
                   },
                 }}
               >
                 {category?.name}
               </Button>
             ))}
+
+            <IconButton
+              aria-label="more"
+              id="long-button"
+              aria-controls={open ? "long-menu" : undefined}
+              aria-expanded={open ? "true" : undefined}
+              aria-haspopup="true"
+              onClick={handleClick}
+            >
+              <RxHamburgerMenu color="white" />
+            </IconButton>
+            <Menu
+              id="long-menu"
+              MenuListProps={{
+                "aria-labelledby": "long-button",
+              }}
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              PaperProps={{
+                style: {
+                  maxHeight:ITEM_HEIGHT * 4.5,
+                  width: "25ch",
+                  background: theme.palette.primary.main,
+                },
+              }}
+            >
+              {listItems?.map((category) => (
+                <MenuItem
+                  key={category}
+                  onClick={handleClose}
+                  sx={{ color: "white" }}
+                >
+                  <Button
+                    key={category?.id}
+                    component={NavLink}
+                    to={`/posts/category/${category?.name}`}
+                    sx={{
+                      borderRadius: 0,
+                      fontSize: ".9rem",
+                      fontWeight: "800",
+                      fontFamily: '"Montserrat", sans-serif',
+                      color: "white",
+                      display: "block",
+                      "&.active": {
+                        color: theme.palette.primary.light,
+                        bgcolor: "white",
+                      },
+                      ":hover": {
+                        color: "#ccc",
+                      },
+                    }}
+                  >
+                    {category?.name}
+                  </Button>
+                </MenuItem>
+              ))}
+            </Menu>
           </Box>
         </Toolbar>
 
         {subCategories?.length > 0 && (
           <Toolbar
+            variant="dense"
             disableGutters
             sx={{
               p: 0,
@@ -343,7 +414,7 @@ const DesktopNavbar = () => {
                 lg: "0 18rem",
                 md: "0 9rem",
               },
-              bgcolor: "#cccccc31",
+              bgcolor: "#ffffff",
               position: "relative",
             }}
           >
@@ -376,14 +447,14 @@ const DesktopNavbar = () => {
                   sx={{
                     mx: 0.3,
                     my: 1,
-                    fontSize: ".7rem",
+                    fontSize: ".8rem",
                     fontWeight: "700",
                     color: theme.palette.primary.dark,
 
                     display: "block",
                     "&.active": {
-                      color: "#9ad8eb",
-                      bgcolor: "#044458",
+                      color: "#fff",
+                      bgcolor: theme.palette.primary.main,
                     },
                     ":hover": {
                       borderRadius: 0,

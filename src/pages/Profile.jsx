@@ -34,7 +34,7 @@ const Profile = () => {
       {postLoading ? (
         <MainLoadingComp isLoading={postLoading} />
       ) : matches ? (
-        posts?.map((post) => <ExPostCard key={post.id} post={post} />)
+        posts?.map((post) => <ExPostCard key={post?.id} post={post} />)
       ) : matchesTab ? (
         <Grid container>
           {posts?.map((p) => (
@@ -54,7 +54,7 @@ const Profile = () => {
               sx={{ pt: 3, mb: 4, backgroundColor: "transparent" }}
               alignItems="center"
             >
-              <PostCard key={post.id} post={post} />
+              <PostCard key={post?.id} post={post} />
             </Stack>
           ))}
         </div>
