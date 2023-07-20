@@ -19,9 +19,11 @@ const TopOfLogoAd = () => {
           sx={{
             maxWidth: "100%",
             height: { md: "280px", lg: "250px" },
-            bgcolor: "#e66a11",
+            bgcolor: "transparent",
+            border: "1px solid black",
+            boxShadow: "11px 12px #4f4b4b",
             display: "flex",
-            flexDirection:'column',
+            flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
           }}
@@ -30,16 +32,16 @@ const TopOfLogoAd = () => {
             align="center"
             gutterBottom
             fontSize={25}
-            sx={{ fontFamily: "monospace", color:"white" }}
+            sx={{ fontFamily: "monospace", color: "black" }}
           >
             Reklam Alanı
           </Typography>
           <Typography
             align="center"
             fontSize={17}
-            sx={{ fontFamily: "monospace", color: "white" }}
+            sx={{ fontFamily: "monospace", color: "black" }}
           >
-            Reklam vermek için İletişim Hattımızdan bizimle irtibata geçin.
+            Reklam vermek için İletişim Hattımızdan bizimle irtibata geçiniz.
           </Typography>
         </Box>
       </a>
