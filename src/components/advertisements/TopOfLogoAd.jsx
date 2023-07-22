@@ -17,11 +17,12 @@ const TopOfLogoAd = () => {
         /> */}
         <Box
           sx={{
+            my: 1,
             maxWidth: "100%",
             height: { md: "280px", lg: "250px" },
             bgcolor: "transparent",
             border: "1px solid black",
-            boxShadow: "11px 12px #4f4b4b",
+            boxShadow: { xs: "none", md: "11px 12px #4f4b4b" },
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",

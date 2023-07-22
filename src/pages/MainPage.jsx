@@ -35,6 +35,7 @@ import ShowTopsOfMasterpiecesComp from "../components/masterpiece/ShowTopsOfMast
 import TopOfLogoAd from "../components/advertisements/TopOfLogoAd";
 import InfosCarousel from "../components/encyclopediaArticle/InfosCarousel";
 import { useGetLastSevenEncyclopediaArticlesQuery } from "../features/encyclopediaArticle/encyclopediaArticleSlice";
+import TopOfPageAd from "../components/advertisements/TopOfPageAd";
 
 const MainPage = () => {
   const theme = useTheme();
@@ -236,11 +237,12 @@ const MainPage = () => {
               </Stack>
             </Grid>
           </Grid>
-
+          <TopOfLogoAd />
           {sevenInfos?.length > 0 && <InfosCarousel data={sevenInfos} />}
           <div className="container">
             <Stack spacing={2} sx={{ p: 1, pt: 3 }} alignItems="center">
               <PostsList propData={fourPost} />
+              <TopOfPageAd />
               <PostsList propData={mainPosts} />
             </Stack>
             <RightSide />
