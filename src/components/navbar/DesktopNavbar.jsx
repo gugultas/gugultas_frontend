@@ -238,8 +238,31 @@ const DesktopNavbar = () => {
                     </MenuItem>
                   </div>
                 )}
+                {isEditor(userRoles) && (
+                  <div>
+                    <MenuItem onClick={handleCloseUserMenu}>
+                      <Link to={`/editor/infos`}>
+                        <Typography textAlign="center">
+                          Yeni Bilgi Ekle
+                        </Typography>
+                      </Link>
+                    </MenuItem>
+                    <MenuItem onClick={handleCloseUserMenu}>
+                      <Link to={`/administration/masterpieces`}>
+                        <Typography textAlign="center">Eserler</Typography>
+                      </Link>
+                    </MenuItem>
+                  </div>
+                )}
                 {isAdmin(userRoles) && (
                   <div>
+                    <MenuItem onClick={handleCloseUserMenu}>
+                      <Link to={`/editor/infos`}>
+                        <Typography textAlign="center">
+                          Yeni Bilgi Ekle
+                        </Typography>
+                      </Link>
+                    </MenuItem>
                     <MenuItem onClick={handleCloseUserMenu}>
                       <Link to={`/administration/users`}>
                         <Typography textAlign="center">Kullanıcılar</Typography>
@@ -364,7 +387,7 @@ const DesktopNavbar = () => {
               onClose={handleClose}
               PaperProps={{
                 style: {
-                  maxHeight:ITEM_HEIGHT * 4.5,
+                  maxHeight: ITEM_HEIGHT * 4.5,
                   width: "25ch",
                   background: theme.palette.primary.main,
                 },

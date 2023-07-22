@@ -82,6 +82,7 @@ export const apiSlice = createApi({
     "Contact",
     "SubCategory",
     "Masterpiece",
+    "EncyclopediaArticle",
   ],
   endpoints: (builder) => ({}),
 });

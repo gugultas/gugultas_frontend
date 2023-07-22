@@ -49,7 +49,7 @@ const SinglePostComp = ({ post, comments }) => {
       <h4 className="heading-tertiary" style={{ textAlign: "left" }}>
         {post.subtitle}
       </h4>
-      <p className="paragraph--parsed">{parseHtmlText(post.content)}</p>
+      <p className="paragraph--parsed">{parseHtmlText(post?.content)}</p>
 
       {/* Post Edit/Delete */}
       {username && post?.username === username && (

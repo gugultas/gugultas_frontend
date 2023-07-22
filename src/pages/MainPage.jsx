@@ -33,6 +33,8 @@ import { shortestIntroText } from "../utils/shortestIntroText";
 import Navbar from "../components/navbar/Navbar";
 import ShowTopsOfMasterpiecesComp from "../components/masterpiece/ShowTopsOfMasterpiecesComp";
 import TopOfLogoAd from "../components/advertisements/TopOfLogoAd";
+import InfosCarousel from "../components/encyclopediaArticle/InfosCarousel";
+import { useGetLastSevenEncyclopediaArticlesQuery } from "../features/encyclopediaArticle/encyclopediaArticleSlice";
 
 const MainPage = () => {
   const theme = useTheme();
@@ -43,13 +45,15 @@ const MainPage = () => {
     useGetFourPostsForTopQuery();
   const { data: mainPosts, isLoading: mainLoading } =
     useGetMainPagePostsQuery();
-
   const {
     data: sidePosts,
     isLoading: postsLoading,
     isError: postIsError,
     error: postError,
   } = useGetThreeRandomPostsQuery();
+  const { data: sevenInfos, isLoading: ldngSvn } =
+    useGetLastSevenEncyclopediaArticlesQuery();
+
   return (
     <>
       <DesktopNavbar />
@@ -58,9 +62,9 @@ const MainPage = () => {
       {matches ? (
         <>
           <MainPageLayout>
-            {(isLoading || fourLoading || mainLoading) && (
+            {(isLoading || fourLoading || mainLoading || ldngSvn) && (
               <MainLoadingComp
-                isLoading={isLoading || fourLoading || mainLoading}
+                isLoading={isLoading || fourLoading || mainLoading || ldngSvn}
               />
             )}
 
@@ -71,6 +75,7 @@ const MainPage = () => {
                     <PlainPostCard post={a} />
                   </Grid>
                 ))}
+
                 <Grid item xs={12} md={8}>
                   <PostCarousel posts={data} />
                 </Grid>
@@ -192,8 +197,10 @@ const MainPage = () => {
                   </Stack>
                 </Grid>
               </Grid>
+              {sevenInfos?.length > 0 && <InfosCarousel data={sevenInfos} />}
             </>
           </MainPageLayout>
+
           <MiniFooter />
         </>
       ) : (
@@ -229,6 +236,8 @@ const MainPage = () => {
               </Stack>
             </Grid>
           </Grid>
+
+          {sevenInfos?.length > 0 && <InfosCarousel data={sevenInfos} />}
           <div className="container">
             <Stack spacing={2} sx={{ p: 1, pt: 3 }} alignItems="center">
               <PostsList propData={fourPost} />

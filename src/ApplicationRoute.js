@@ -33,6 +33,9 @@ import NewMasterpiece from "./pages/NewMasterpiece";
 import Music from "./pages/Music";
 import Picture from "./pages/Picture";
 import Movie from "./pages/Movie";
+import NewEncyclopediaArticle from "./pages/NewEncyclopediaArticle";
+import EncyclopediaArticles from "./pages/EncyclopediaArticles";
+import EncyclopediaArticle from "./pages/EncyclopediaArticle";
 
 const ROLES = {
   User: "ROLE_USER",
@@ -67,6 +70,12 @@ const ApplicationRoute = () => {
             <Route path="/musicById/:id" element={<Music />} />
             <Route path="/pictureById/:id" element={<Picture />} />
             <Route path="/movieById/:id" element={<Movie />} />
+            <Route path="/infos" element={<EncyclopediaArticles />} />
+            <Route path="/infos" element={<EncyclopediaArticle />} />
+            <Route path="/infos">
+              <Route index element={<EncyclopediaArticles />} />
+              <Route path=":id" element={<EncyclopediaArticle />} />
+            </Route>
             <Route path="/posts">
               <Route index element={<Home />} />
               <Route path=":postId" element={<PostByID />} />
@@ -131,6 +140,17 @@ const ApplicationRoute = () => {
                     allowedRoles={ROLES.Editor}
                   >
                     <EditorNewPost />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="infos"
+                element={
+                  <RequireAuth
+                    accessToken={accessToken}
+                    allowedRoles={[ROLES.Editor, ROLES.Admin]}
+                  >
+                    <NewEncyclopediaArticle />
                   </RequireAuth>
                 }
               />
