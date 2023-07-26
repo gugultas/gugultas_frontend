@@ -36,6 +36,7 @@ import TopOfLogoAd from "../components/advertisements/TopOfLogoAd";
 import InfosCarousel from "../components/encyclopediaArticle/InfosCarousel";
 import { useGetLastSevenEncyclopediaArticlesQuery } from "../features/encyclopediaArticle/encyclopediaArticleSlice";
 import TopOfPageAd from "../components/advertisements/TopOfPageAd";
+import { Helmet } from "react-helmet-async";
 
 const MainPage = () => {
   const theme = useTheme();
@@ -57,6 +58,13 @@ const MainPage = () => {
 
   return (
     <>
+      <Helmet prioritizeSeoTags>
+        <title>Gugultaş | Anasayfa</title>
+        <meta
+          name="description"
+          description="Eleştirilere açık , fikirleri özgün , kalemi keskin her vatandaşımızı dergimize davet ediyoruz. Hem öğretmen hem öğrenci zihniyetine sahip isen , ahlaklı ve karakter sahibi olduğunu iddia ediyor ve ufkunu genişletmek istiyor isen hemen aramıza katıl ve görüşlerini insanlarla paylaş. Gugultaş hizmetinizde..."
+        />
+      </Helmet>
       <DesktopNavbar />
       <Navbar />
 

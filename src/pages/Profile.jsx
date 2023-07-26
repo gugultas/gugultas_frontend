@@ -10,6 +10,7 @@ import ExPostCard from "../external_components/posts/ExPostCard";
 import { useGetPostsByAuthorQuery } from "../features/posts/postSlice";
 import { useGetAuthorByQuery } from "../features/user/usersSlice";
 import ProfileLayout from "../layouts/ProfileLayout";
+import { Helmet } from "react-helmet-async";
 
 const Profile = () => {
   const { username } = useParams();
@@ -26,6 +27,10 @@ const Profile = () => {
     </ProfileLayout>
   ) : (
     <ProfileLayout>
+      <Helmet prioritizeSeoTags>
+        <title>{username + " | Gugultaş"}</title>
+        <meta name="description" description={data?.description} />
+      </Helmet>
       {isLoading ? (
         <MainLoadingComp isLoading={isLoading} />
       ) : (

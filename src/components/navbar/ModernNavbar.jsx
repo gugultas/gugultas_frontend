@@ -12,13 +12,13 @@ import {
   useTheme,
 } from "@mui/material";
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import {
   AiOutlineHome,
   AiOutlineLogout,
   AiOutlineSetting,
 } from "react-icons/ai";
-import { MdOutlineCategory, MdPeopleOutline } from "react-icons/md";
+import { MdOutlineCategory, MdPeopleOutline, MdSearch } from "react-icons/md";
 import { IoMdPerson } from "react-icons/io";
 import { BsDoorClosed } from "react-icons/bs";
 
@@ -156,6 +156,18 @@ const ModernNavbar = () => {
             sx={iconStyle}
           >
             <MdPeopleOutline style={{ fontSize: "1.9rem" }} />
+          </IconButton>
+        </BootstrapTooltip>
+
+        {/* Search */}
+        <BootstrapTooltip title="Arama Sayfasına Git" placement="right">
+          <IconButton
+            component={NavLink}
+            to="/search"
+            size="large"
+            sx={iconStyle}
+          >
+            <MdSearch style={{ fontSize: "1.9rem" }} />
           </IconButton>
         </BootstrapTooltip>
 

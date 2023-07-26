@@ -12,10 +12,18 @@ import { parseHtmlText } from "../../utils/htmlParseConfig";
 import { NavLink } from "react-router-dom";
 import { AiFillRightCircle } from "react-icons/ai";
 import moment from "moment";
+import { Helmet } from "react-helmet-async";
 
 const EncyclopediaArticleComp = ({ data, sevenInfos }) => {
   return (
     <Stack spacing={4} sx={{ p: { xs: 0.5, md: 1.5 } }}>
+      <Helmet prioritizeSeoTags>
+        <title>{data?.title}</title>
+        <meta
+          name="description"
+          description="bilgi , çok arananlar , bunu biliyor muydunuz ? , ansiklopedi , ülkeler"
+        />
+      </Helmet>
       <h2 className="info-header p-padding-top-medium">{data.title}</h2>
 
       <p className="paragraph--parsed">{parseHtmlText(data?.content)}</p>

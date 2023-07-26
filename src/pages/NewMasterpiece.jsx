@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import FormPageLayout from "../layouts/FormPageLayout";
 import { MenuItem, TextField } from "@mui/material";
 import NewMasterpieceComp from "../components/masterpiece/NewMasterpieceComp";
+import { Helmet } from "react-helmet-async";
 
 const NewMasterpiece = () => {
   const genres = ["music", "picture", "movie"];
@@ -12,6 +13,13 @@ const NewMasterpiece = () => {
 
   return (
     <FormPageLayout>
+      <Helmet prioritizeSeoTags>
+        <title>Eser Ekle</title>
+        <meta
+          name="description"
+          description="Eser ekle"
+        />
+      </Helmet>
       <TextField
         id="genre"
         required

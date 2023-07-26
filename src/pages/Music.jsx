@@ -4,6 +4,7 @@ import MainLayout from "../layouts/MainLayout";
 import { useGetMusicByIdQuery } from "../features/masterpiece/masterpieceSlice";
 import MasterpieceById from "../components/masterpiece/MasterpieceById";
 import MainLoadingComp from "../components/loading/MainLoadingComp";
+import { Helmet } from "react-helmet-async";
 
 const Music = () => {
   const { id } = useParams();
@@ -12,6 +13,13 @@ const Music = () => {
 
   return (
     <MainLayout>
+      <Helmet prioritizeSeoTags>
+        <title>{data?.title + " | Eser"}</title>
+        <meta
+          name="description"
+          description={data?.showLink + " " + data?.showLink2 + " " + data?.marketLink }
+        />
+      </Helmet>
       {isLoading ? (
         <MainLoadingComp isLoading={isLoading} />
       ) : (

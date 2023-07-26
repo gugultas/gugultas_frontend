@@ -40,6 +40,7 @@ import useLogout from "../../hooks/useLogout.hook";
 import { BRAND } from "../../config/constants";
 import { BASE_URL, photosApiUrl } from "../../config/urls";
 import { stringAvatar } from "../../utils/CustomProfileImage";
+import SearchBar from "./SearchBar";
 
 const drawerWidth = 200;
 
@@ -109,7 +110,9 @@ export default function Navbar(props) {
           {BRAND}
         </Typography>
       </Box>
+
       <Divider />
+
       <List sx={{ bgcolor: "#f0eeee" }}>
         {/* Authors */}
         <ListItemButton onClick={handleAuthorClick}>
@@ -162,6 +165,7 @@ export default function Navbar(props) {
               ))}
           </List>
         </Collapse>
+
         <ListItemButton
           sx={{
             textAlign: "center",
@@ -247,6 +251,10 @@ export default function Navbar(props) {
             <ListItemText primary="Çıkış Yap" />
           </ListItemButton>
         )}
+
+        <ListItemButton>
+          <SearchBar />
+        </ListItemButton>
       </List>
     </div>
   );
@@ -269,7 +277,7 @@ export default function Navbar(props) {
             top: 4,
             left: 13,
             zIndex: 10000,
-            bgcolor:'white'
+            bgcolor: "white",
           }}
         >
           <AiOutlineMenu />

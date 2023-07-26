@@ -32,7 +32,7 @@ const theme = createTheme({
   },
   typography: {
     // In Chinese and Japanese the characters are usually larger,
-    fontSize: 15,
+    fontSize: 16,
     // so a smaller fontsize may be appropriate.
     h6: {
       fontSize: "1.8rem",

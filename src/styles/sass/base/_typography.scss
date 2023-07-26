@@ -58,6 +58,7 @@ body {
   text-transform: uppercase;
   font-weight: 700;
   display: inline-block;
+  word-break: break-word;
   background-image: linear-gradient(
     to left,
     var(--color-grey-dark-2),
@@ -79,11 +80,8 @@ body {
     font-size: 2.7rem;
   }
   @include respond(phone) {
-    font-size: 2.3rem;
-    &:hover {
-      transform: skewY(-2deg) skewX(1deg) scale(1.02);
-      text-shadow: 0.5rem 1rem 2rem rgba(var(--color-grey-dark-1), 0.2);
-    }
+    font-size: 1.8rem;
+    letter-spacing: 0;
   }
 
   &--profile {

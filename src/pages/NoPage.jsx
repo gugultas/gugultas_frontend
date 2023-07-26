@@ -6,6 +6,7 @@ import AuthButton from "../components/button/AuthButton";
 import ReturnButton from "../components/button/ReturnButton";
 import MainLayout from "../layouts/MainLayout";
 import NoFoundImage from "./../assets/img/404.png";
+import { Helmet } from "react-helmet-async";
 
 const NoPage = () => {
   const location = useLocation();
@@ -14,6 +15,10 @@ const NoPage = () => {
 
   return (
     <MainLayout>
+      <Helmet prioritizeSeoTags>
+        <title>404 Sayfa Bulunamadı</title>
+        <meta name="description" description="Aradığınız sayfa bulunamadı" />
+      </Helmet>
       <Stack spacing={4} sx={{ alignItems: "center" }}>
         <img
           src={NoFoundImage}

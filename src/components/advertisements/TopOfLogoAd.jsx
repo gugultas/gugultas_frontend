@@ -32,14 +32,17 @@ const TopOfLogoAd = () => {
           <Typography
             align="center"
             gutterBottom
-            fontSize={25}
-            sx={{ fontFamily: "monospace", color: "black" }}
+            sx={{
+              fontFamily: "monospace",
+              color: "black",
+              fontSize: { xs: 20, md: 25 },
+            }}
           >
             Reklam Alanı
           </Typography>
           <Typography
             align="center"
-            fontSize={17}
+            fontSize={15}
             sx={{ fontFamily: "monospace", color: "black" }}
           >
             Reklam vermek için İletişim Hattımızdan bizimle irtibata geçiniz.

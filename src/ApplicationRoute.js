@@ -36,6 +36,8 @@ import Movie from "./pages/Movie";
 import NewEncyclopediaArticle from "./pages/NewEncyclopediaArticle";
 import EncyclopediaArticles from "./pages/EncyclopediaArticles";
 import EncyclopediaArticle from "./pages/EncyclopediaArticle";
+import Playlist from "./pages/Playlist";
+import Search from "./pages/Search";
 
 const ROLES = {
   User: "ROLE_USER",
@@ -70,8 +72,8 @@ const ApplicationRoute = () => {
             <Route path="/musicById/:id" element={<Music />} />
             <Route path="/pictureById/:id" element={<Picture />} />
             <Route path="/movieById/:id" element={<Movie />} />
-            <Route path="/infos" element={<EncyclopediaArticles />} />
-            <Route path="/infos" element={<EncyclopediaArticle />} />
+            <Route path="/:username/playlists/:id" element={<Playlist />} />
+            <Route path="/search" element={<Search />} />
             <Route path="/infos">
               <Route index element={<EncyclopediaArticles />} />
               <Route path=":id" element={<EncyclopediaArticle />} />

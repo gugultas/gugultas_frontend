@@ -165,6 +165,31 @@ export const postsApiSlice = apiSlice.injectEndpoints({
       }),
       providesTags: [{ type: "Post", id: "LIST" }],
     }),
+    getPostsByPlaylist: builder.query({
+      query: (id) => ({
+        url: "/posts/getPostsByPlaylist/" + id,
+        method: "get",
+      }),
+      providesTags: [{ type: "Post", id: "LIST" }],
+    }),
+    getPostsOfAuthorForPlaylist: builder.query({
+      query: (reqBody) => ({
+        url:
+          "/posts/getPostsOfAuthorForPlaylist/" +
+          reqBody.username +
+          "/" +
+          reqBody.playlistId,
+        method: "get",
+      }),
+      providesTags: [{ type: "Post", id: "LIST" }],
+    }),
+    searchPosts: builder.query({
+      query: (title) => ({
+        url: "/posts/searchPosts/" + title,
+        method: "get",
+      }),
+      providesTags: [{ type: "Post", id: "LIST" }],
+    }),
     addPost: builder.mutation({
       query: (reqBody) => ({
         url: "/posts",
@@ -246,6 +271,9 @@ export const {
   useGetPostsBySubCategoryQuery,
   useGetPostsByAuthorQuery,
   useGetDeactivatedPostsQuery,
+  useGetPostsByPlaylistQuery,
+  useGetPostsOfAuthorForPlaylistQuery,
+  useSearchPostsQuery,
   useAddPostMutation,
   useUpdatePostMutation,
   useDeactivatePostMutation,

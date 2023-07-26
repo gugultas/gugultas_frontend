@@ -67,6 +67,13 @@ export const usersApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: [{ type: "User", id: "LIST" }],
     }),
+    deactivateUser: builder.mutation({
+      query: (userId) => ({
+        url: "/authors/deactivateAuthor/" + userId,
+        method: "put",
+      }),
+      invalidatesTags: [{ type: "User", id: "LIST" }],
+    }),
   }),
 });
 
@@ -81,4 +88,5 @@ export const {
   useUnMakeAuthorMutation,
   useMakeEditorMutation,
   useUnMakeEditorMutation,
+  useDeactivateUserMutation,
 } = usersApiSlice;

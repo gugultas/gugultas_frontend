@@ -2,7 +2,13 @@ import * as React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { Box, IconButton, useMediaQuery, useTheme } from "@mui/material";
+import {
+  Box,
+  IconButton,
+  Stack,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import { MdCalendarToday, MdModeComment } from "react-icons/md";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { BiCategory } from "react-icons/bi";
@@ -12,10 +18,19 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 
 import LikeComp from "../like/LikeComp";
 import { BASE_URL, photosApiUrl } from "../../config/urls";
+import { isAuthor } from "../../validation/conditions/checkRole";
+import { selectCurrentUserRoles } from "../../features/auth/authSlice";
+import { useSelector } from "react-redux";
+import RemoveFromPlaylist from "../playlist/RemoveFromPlaylist";
 
-export default function PostCard({ post }) {
+export default function PostCard({
+  post,
+  playlistId = null,
+  removeFromPlaylist = false,
+}) {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("md"));
+  const userRoles = useSelector(selectCurrentUserRoles);
   const postImage = post?.image && `${BASE_URL}${photosApiUrl}/${post?.image}`;
 
   const infos = {
@@ -88,12 +103,14 @@ export default function PostCard({ post }) {
             <Typography sx={{ fontSize: 11 }}>{post?.comments}</Typography>
           </h4>
         </Box>
-        <Link to={`/users/${post?.username}`}>
-          <h2 className="list-header u-text-center">{post?.username}</h2>
-        </Link>
-        {/* <p className="paragraph--min p-padding-top-small">
-          {post?.subtitle ? post.subtitle : text}
-        </p> */}
+        <Stack direction="row" justifyContent="space-around">
+          <Link to={`/users/${post?.username}`}>
+            <h2 className="list-header u-text-center">{post?.username}</h2>
+          </Link>
+          {isAuthor(userRoles) && removeFromPlaylist && (
+            <RemoveFromPlaylist postId={post?.id} playlistId={playlistId} />
+          )}
+        </Stack>
       </CardContent>
     </Card>
   );

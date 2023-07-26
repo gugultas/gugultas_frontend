@@ -5,9 +5,13 @@ import { FaAngleUp } from "react-icons/fa";
 import PostsList from "../features/posts/PostsList";
 import MainLayout from "../layouts/MainLayout";
 import "../styles/sass/main.scss";
+import { Helmet } from "react-helmet-async";
 
 const Home = () => {
+  
   const [showTopBtn, setShowTopBtn] = useState(false);
+
+  
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -26,8 +30,12 @@ const Home = () => {
   };
   return (
     <>
+      <Helmet prioritizeSeoTags>
+        <title>Tüm Yazılar</title>
+        <meta name="description" description="Tüm yazıları gör. Dergimizde mevcut olan veya olmayan tüm yazıları burada görebilirsiniz." />
+      </Helmet>
       <MainLayout>
-        <PostsList />
+        <PostsList/>
       </MainLayout>
       {showTopBtn && (
         <IconButton

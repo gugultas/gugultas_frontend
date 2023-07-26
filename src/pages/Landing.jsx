@@ -17,6 +17,7 @@ import "./../styles/sass/main.scss";
 import ResourceNotFound from "../components/error/ResourceNotFound";
 import { checkAuthByCookie } from "../validation/conditions/checkAuthByBrowserCookie";
 import { BRAND } from "../config/constants";
+import { Helmet } from "react-helmet-async";
 
 const Landing = () => {
   const {
@@ -28,6 +29,10 @@ const Landing = () => {
 
   return (
     <LandingLayout>
+      <Helmet prioritizeSeoTags>
+        <title>Gugultaş</title>
+        <meta name="description" description="Eleştirilere açık , fikirleri özgün , kalemi keskin her vatandaşımızı dergimize davet ediyoruz. Hem öğretmen hem öğrenci zihniyetine sahip isen , ahlaklı ve karakter sahibi olduğunu iddia ediyor ve ufkunu genişletmek istiyor isen hemen aramıza katıl ve görüşlerini insanlarla paylaş. Gugultaş hizmetinizde..." />
+      </Helmet>
       <header className="header">
         <div className="header__logo-box">
           <img src={Logo} alt="Logo" className="header__logo" />

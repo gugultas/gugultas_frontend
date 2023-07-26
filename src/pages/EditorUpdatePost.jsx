@@ -7,6 +7,7 @@ import { useGetCategoriesQuery } from "../features/categories/categorySlice";
 import { useGetPostByIdQuery } from "../features/posts/postSlice";
 import FormLayout from "../layouts/FormLayout";
 import ProfileLayout from "../layouts/ProfileLayout";
+import { Helmet } from "react-helmet-async";
 
 const EditorUpdatePost = () => {
   const { postId } = useParams();
@@ -21,6 +22,10 @@ const EditorUpdatePost = () => {
 
   return (
     <ProfileLayout>
+      <Helmet prioritizeSeoTags>
+        <title>Yazı Düzenle | Editor</title>
+        <meta name="description" description="Editörler için yazı düzenleme sayfası. " />
+      </Helmet>
       {isLoading || categoriesLoading ? (
         <MainLoadingComp isLoading={isLoading || categoriesLoading} />
       ) : isError || ctgIsErr ? (

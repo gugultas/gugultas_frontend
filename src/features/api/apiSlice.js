@@ -83,6 +83,7 @@ export const apiSlice = createApi({
     "SubCategory",
     "Masterpiece",
     "EncyclopediaArticle",
+    "Playlist",
   ],
   endpoints: (builder) => ({}),
 });

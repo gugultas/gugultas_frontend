@@ -17,7 +17,7 @@ export const validatePasswordLength = (text) => {
 };
 
 export const validateTitleLength = (text) => {
-  return _validateLength(text, { min: 2, max: 75 });
+  return _validateLength(text, { min: 2, max: 60 });
 };
 
 export const validateContactContentLength = (text) => {
@@ -25,7 +25,7 @@ export const validateContactContentLength = (text) => {
 };
 
 export const validateContentTitleLength = (text) => {
-  return _validateLength(text, { min: 2, max: 75 });
+  return _validateLength(text, { min: 2, max: 60 });
 };
 
 export const validateContentLength = (text) => {

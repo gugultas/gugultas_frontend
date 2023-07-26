@@ -7,11 +7,11 @@ const TopOfPageAd = () => {
       <a href="#">
         <Box
           sx={{
-            height: "100px",
+            height: "110px",
             maxWidth: "100%",
             bgcolor: "transparent",
             border: "1px solid black",
-            boxShadow: "3px 5px #4f4b4b",
+            boxShadow: { xs: "none", md: "3px 5px #4f4b4b" },
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
@@ -22,14 +22,17 @@ const TopOfPageAd = () => {
           <Typography
             align="center"
             gutterBottom
-            fontSize={25}
-            sx={{ fontFamily: "monospace", color: "black" }}
+            sx={{
+              fontFamily: "monospace",
+              color: "black",
+              fontSize: { xs: 20, md: 25 },
+            }}
           >
             Reklam Alanı
           </Typography>
           <Typography
             align="center"
-            fontSize={17}
+            fontSize={15}
             sx={{ fontFamily: "monospace", color: "black" }}
           >
             Reklam vermek için İletişim Hattımızdan bizimle irtibata geçiniz.

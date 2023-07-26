@@ -96,7 +96,7 @@ const EditorNewPostComp = () => {
     }
 
     if (titleHasError) {
-      setError("En fazla 75 karakter içeren bir başlık giriniz.");
+      setError("En fazla 60 karakter içeren bir başlık giriniz.");
       setOpen(true);
       return;
     }

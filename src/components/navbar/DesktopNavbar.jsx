@@ -35,6 +35,7 @@ import { stringAvatar } from "../../utils/CustomProfileImage";
 import { useGetCategoriesQuery } from "../../features/categories/categorySlice";
 import { useGetActiveSubCategoriesByCategoryQuery } from "../../features/sub-categories/subCategorySlice";
 import SocialLinks from "../social_media/SocialLinks";
+import SearchBar from "./SearchBar";
 
 const pages = [
   { id: 0, pageName: "/posts", navName: "Tüm Yazıları Gör" },
@@ -132,13 +133,13 @@ const DesktopNavbar = () => {
           >
             <h3 className="list-header">{BRAND}</h3>
           </Link>
-          <Box sx={{ flexGrow: 1, display: "flex", mx: 3 }}>
+          <Box sx={{ flexGrow: 1, display: "flex", mx: {md:1,lg:3}, alignItems:"center" }}>
             {pages.map((page) => (
               <Button
                 key={page.id}
                 onClick={() => navigate(page.pageName)}
                 sx={{
-                  mx: 2,
+                  mx: 1,
                   px: 1,
                   fontSize: "1.1rem",
                   fontWeight: "900",
@@ -154,6 +155,7 @@ const DesktopNavbar = () => {
                 {page.navName}
               </Button>
             ))}
+            <SearchBar />
           </Box>
 
           <Box

@@ -20,11 +20,16 @@ import { stringAvatar } from "../../utils/CustomProfileImage";
 import { parseHtmlText } from "../../utils/htmlParseConfig";
 import { useSelector } from "react-redux";
 import { selectCurrentUserRoles } from "../../features/auth/authSlice";
-import { isEditor } from "../../validation/conditions/checkRole";
+import { isAuthor, isEditor } from "../../validation/conditions/checkRole";
 import { BASE_URL, photosApiUrl } from "../../config/urls";
 import { checkImageExist } from "../../validation/conditions/checkImageExist";
+import RemoveFromPlaylist from "../../components/playlist/RemoveFromPlaylist";
 
-export default function ExPostCard({ post }) {
+export default function ExPostCard({
+  post,
+  playlistId = null,
+  removeFromPlaylist = false,
+}) {
   const userRoles = useSelector(selectCurrentUserRoles);
   const postImage = post?.image && `${BASE_URL}${photosApiUrl}/${post?.image}`;
   const userImage = checkImageExist(
@@ -32,6 +37,7 @@ export default function ExPostCard({ post }) {
     post?.profileImageType
   );
   const [anchorEl, setAnchorEl] = React.useState(null);
+
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -49,6 +55,7 @@ export default function ExPostCard({ post }) {
   if (typeof text2 === "string") {
     text = parseHtmlText(text2);
   }
+
   return (
     <Box
       className="main__post"
@@ -96,7 +103,7 @@ export default function ExPostCard({ post }) {
                 height: { xs: 30, md: 50 },
               }}
               src={userImage}
-              {...stringAvatar(post?.username.toUpperCase())}
+              {...stringAvatar(post?.username?.toUpperCase())}
             />
             <Box sx={{ textAlign: "center", alignItems: "center", mt: 1.5 }}>
               <Link to={`/users/${post?.username}`}>
@@ -136,7 +143,7 @@ export default function ExPostCard({ post }) {
                   variant="contained"
                   onClick={handleClick}
                 >
-                  <BsThreeDotsVertical />
+                  <BsThreeDotsVertical size={17} />
                 </IconButton>
                 <Popover
                   id={id}
@@ -153,6 +160,9 @@ export default function ExPostCard({ post }) {
                   </Link>
                 </Popover>
               </>
+            )}
+            {isAuthor(userRoles) && removeFromPlaylist && (
+              <RemoveFromPlaylist postId={post?.id} playlistId={playlistId} />
             )}
           </Box>
         </Box>

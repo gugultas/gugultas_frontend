@@ -6,6 +6,7 @@ import SignUpForm from "../components/auth/SignUpForm";
 import "../styles/sass/main.scss";
 import { MaterialUISwitch } from "../utils/MaterialUISwitch";
 import FormPageLayout from "../layouts/FormPageLayout";
+import { Helmet } from "react-helmet-async";
 
 const Auth = () => {
   const [checked, setChecked] = React.useState(true);
@@ -16,6 +17,10 @@ const Auth = () => {
 
   return (
     <FormPageLayout>
+      <Helmet prioritizeSeoTags>
+        <title>Aramıza Katıl</title>
+        <meta name="description" description="Gugultaş'a üye ol veya giriş yap. " />
+      </Helmet>
       <FormGroup sx={{ mb: 2, mt: 4 }}>
         <FormControlLabel
           control={<MaterialUISwitch sx={{ m: 1 }} />}
