@@ -39,7 +39,7 @@ const SharePost = ({ title }) => {
         <EmailShareButton url={url} subject={title} separator>
           <EmailIcon size={SIZE_ICON} style={style} />
         </EmailShareButton>
-        <RedditShareButton url={url}>
+        <RedditShareButton title={title}>
           <RedditIcon size={SIZE_ICON} style={style} />
         </RedditShareButton>
       </Stack>

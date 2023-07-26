@@ -46,7 +46,7 @@ const SinglePostComp = ({ post, comments }) => {
   return (
     <Stack spacing={4} sx={{ p: { xs: 0.5, md: 1.5 } }}>
       <Helmet prioritizeSeoTags>
-        <title>{post?.title + " | Eser"}</title>
+        <title>{post?.title + " | Yazı"}</title>
         <meta name="description" description={post?.subtitle + " " + post?.title + " dergi yazısı"} />
       </Helmet>
       <h2 className="heading-secondary p-padding-top-medium">{post.title}</h2>
