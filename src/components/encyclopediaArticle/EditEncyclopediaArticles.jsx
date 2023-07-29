@@ -21,6 +21,7 @@ import { validateContentTitleLength } from "../../validation/methods/length.meth
 import FormField from "../form/FormField";
 import { useUpdateEncyclopediaArticleMutation } from "../../features/encyclopediaArticle/encyclopediaArticleSlice";
 import { BiEditAlt } from "react-icons/bi";
+import MultilineFormField from "../form/MultilineFormField";
 
 const EditEncyclopediaArticles = ({ data }) => {
   const theme = useTheme();
@@ -28,6 +29,7 @@ const EditEncyclopediaArticles = ({ data }) => {
   const [openSnack, setOpenSnack] = React.useState(false);
   const [values, setValues] = React.useState({
     title: data?.title,
+    description: data?.description,
   });
   const [error, setError] = React.useState("");
   const [info, setInfo] = React.useState(data?.content);
@@ -47,7 +49,7 @@ const EditEncyclopediaArticles = ({ data }) => {
     setValues({ ...values, [name]: value });
   };
 
-  const { title } = values;
+  const { title, description } = values;
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -61,6 +63,7 @@ const EditEncyclopediaArticles = ({ data }) => {
     const editEABody = {
       title,
       content: info,
+      description,
     };
 
     const reqBody = {
@@ -103,6 +106,15 @@ const EditEncyclopediaArticles = ({ data }) => {
               onChange={handleChange("title")}
               helperText="En fazla 75 karakter olabilir."
               type="text"
+            />
+            <MultilineFormField
+              fieldName="description"
+              value={description}
+              onChange={handleChange("description")}
+              helperText="Maximum 250 karakter içeren bir tanıtım yazısı giriniz."
+              type="text"
+              fullWidth={true}
+              rows={8}
             />
             <div style={{ maxWidth: "100%", margin: "2rem auto" }}>
               <EditorToolbar />

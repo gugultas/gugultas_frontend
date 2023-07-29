@@ -8,12 +8,13 @@ import EditorToolbar, {
   formats,
   modules,
 } from "./../../utils/QuillEditorToolbar";
-import { validateContentTitleLength } from "../../validation/methods/length.method.validation";
+import { validateContentTitleLength, validateDescriptionLength } from "../../validation/methods/length.method.validation";
 import userInput from "../../hooks/user.input.hook";
 import FormField from "../form/FormField";
 import { Backdrop, CircularProgress, Stack } from "@mui/material";
 import SnackbarMUI from "../snackbar/SnackbarMUI";
 import { useCreateEncyclopediaArticleMutation } from "../../features/encyclopediaArticle/encyclopediaArticleSlice";
+import MultilineFormField from "../form/MultilineFormField";
 
 const NewEncyclopediaArticleComp = () => {
   const navigate = useNavigate();
@@ -34,8 +35,17 @@ const NewEncyclopediaArticleComp = () => {
     clearHandler: titleClearHandler,
   } = userInput(validateContentTitleLength);
 
+  const {
+    text: description,
+    shouldDisplayError: descriptionHasError,
+    textChangeHandler: descriptionChangeHandler,
+    inputBlurHandler: descriptionBlurHandler,
+    clearHandler: descriptionClearHandler,
+  } = userInput(validateDescriptionLength);
+
   const clearForm = () => {
     titleClearHandler();
+    descriptionClearHandler();
   };
 
   const onSubmitHandler = async (e) => {
@@ -48,9 +58,12 @@ const NewEncyclopediaArticleComp = () => {
     const newEncyclopediaArticle = {
       title,
       content,
+      description
     };
 
     const resp = await createEncyclopediaArticle(newEncyclopediaArticle);
+
+    console.log(resp)
 
     if (resp.error) {
       setProgress(false);
@@ -76,6 +89,18 @@ const NewEncyclopediaArticleComp = () => {
           type="text"
           fullwidth={true}
           placeholder="Başlık"
+        />
+        <MultilineFormField 
+          fieldName="description"
+          value={description}
+          onChange={descriptionChangeHandler}
+          onBlur={descriptionBlurHandler}
+          error={descriptionHasError}
+          helperText="Maximum 250 karakter içeren bir tanıtım yazısı giriniz."
+          type="text"
+          fullWidth={true}
+          placeholder="Tanıtım yazısı..."
+          rows={8}
         />
         <div style={{ maxWidth: "100%", margin: "3rem auto" }}>
           <EditorToolbar />

@@ -18,6 +18,7 @@ import { selectCurrentUserRoles } from "../../features/auth/authSlice";
 import { isEditor } from "../../validation/conditions/checkRole";
 
 const EncyclopediaArticlesComp = ({ data }) => {
+  console.log(data)
   const userRoles = useSelector(selectCurrentUserRoles);
   return (
     <>

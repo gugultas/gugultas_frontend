@@ -21,7 +21,7 @@ const EncyclopediaArticleComp = ({ data, sevenInfos }) => {
         <title>{data?.title}</title>
         <meta
           name="description"
-          description="bilgi , çok arananlar , bunu biliyor muydunuz ? , ansiklopedi , ülkeler"
+          description={data?.description}
         />
       </Helmet>
       <h2 className="info-header p-padding-top-medium">{data.title}</h2>
