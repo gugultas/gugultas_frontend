@@ -34,8 +34,8 @@ import useLogout from "../../hooks/useLogout.hook";
 import { stringAvatar } from "../../utils/CustomProfileImage";
 import { useGetCategoriesQuery } from "../../features/categories/categorySlice";
 import { useGetActiveSubCategoriesByCategoryQuery } from "../../features/sub-categories/subCategorySlice";
-import SocialLinks from "../social_media/SocialLinks";
 import SearchBar from "./SearchBar";
+import SocialLinksMenu from "../social_media/SocialLinksMenu";
 
 const pages = [
   { id: 0, pageName: "/posts", navName: "Tüm Yazıları Gör" },
@@ -164,9 +164,10 @@ const DesktopNavbar = () => {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
+              gap:1
             }}
           >
-            <SocialLinks />
+            <SocialLinksMenu />
             {username ? (
               <Tooltip title="Ayarları Aç">
                 <Button

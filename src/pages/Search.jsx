@@ -18,6 +18,7 @@ const Search = () => {
         <title>{searchText + " | Gugultaş"}</title>
         <meta name="description" description={data?.description} />
       </Helmet>
+      <h3 className="heading-secondary u-margin-bottom-medium">Arama Sayfası</h3>
       {isLoading ? (
         <MainLoadingComp isLoading={isLoading} />
       ) : data?.length < 1 ? (

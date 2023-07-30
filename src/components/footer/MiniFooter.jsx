@@ -2,6 +2,7 @@ import React from "react";
 import { Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
 
 import LogoCart from "../logo/LogoCart.jsx";
+import SocialLinksMenu from "../social_media/SocialLinksMenu.jsx";
 import SocialLinks from "../social_media/SocialLinks.jsx";
 
 const MiniFooter = () => {
@@ -26,15 +27,18 @@ const MiniFooter = () => {
         <LogoCart isMini={matches && true} />
         <Typography
           sx={{
-            fontSize: { xs: "1rem", md: "3rem" },
+            fontSize: { xs: "1rem", sm: "2rem", md: "3rem" },
             fontFamily: '"Anybody", cursive;',
             color: theme.palette.primary.light,
           }}
         >
           ÖZGÜN , KESKİN VE SAĞLAM
         </Typography>
-
-        <SocialLinks color="light" size={matches && "small"} />
+        {!matches ? (
+          <SocialLinks color="light" size={matches && "small"} />
+        ) : (
+          <SocialLinksMenu color="light" size={matches && "small"} />
+        )}
       </Stack>
     </Stack>
   );

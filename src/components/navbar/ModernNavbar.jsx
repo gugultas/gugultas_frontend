@@ -372,6 +372,20 @@ const ModernNavbar = () => {
               </MenuItem>
             </div>
           )}
+          {isEditor(userRoles) && (
+            <div>
+              <MenuItem>
+                <Link to={`/editor/infos`} style={linkStyles}>
+                  <Typography textAlign="center">Yeni Bilgi Ekle</Typography>
+                </Link>
+              </MenuItem>
+              <MenuItem>
+                <Link to={`/administration/masterpieces`} style={linkStyles}>
+                  <Typography textAlign="center">Eserler</Typography>
+                </Link>
+              </MenuItem>
+            </div>
+          )}
           {isAdmin(userRoles) && (
             <div>
               <MenuItem>

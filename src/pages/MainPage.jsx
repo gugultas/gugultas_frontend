@@ -71,115 +71,114 @@ const MainPage = () => {
       {matches ? (
         <>
           <MainPageLayout>
-            {(isLoading || fourLoading || mainLoading || ldngSvn) && (
+            {isLoading || fourLoading || mainLoading || ldngSvn ? (
               <MainLoadingComp
                 isLoading={isLoading || fourLoading || mainLoading || ldngSvn}
               />
-            )}
+            ) : (
+              <>
+                <Grid container spacing={5}>
+                  {fourPost?.map((a) => (
+                    <Grid item md={3} key={a.id}>
+                      <PlainPostCard post={a} />
+                    </Grid>
+                  ))}
 
-            <>
-              <Grid container spacing={5}>
-                {fourPost?.map((a) => (
-                  <Grid item md={3} key={a.id}>
-                    <PlainPostCard post={a} />
+                  <Grid item xs={12} md={8}>
+                    <PostCarousel posts={data} />
                   </Grid>
-                ))}
-
-                <Grid item xs={12} md={8}>
-                  <PostCarousel posts={data} />
-                </Grid>
-                <Grid
-                  item
-                  xs={12}
-                  md={4}
-                  // spacing={3}
-                  // sx={{
-                  //   display: "flex",
-                  //   flexDirection: "column",
-                  //   justifyContent: "center",
-                  //   alignItems: "center",
-                  //   textAlign: "center",
-                  // }}
-                >
-                  <Stack spacing={2}>
-                    <Stack>
-                      <Stack
-                        alignItems="center"
-                        sx={{
-                          bgcolor: theme.palette.primary.contrastText,
-                          p: 3,
-                        }}
-                      >
-                        <img
-                          src={Logo}
-                          alt="logo"
-                          style={{
-                            objectFit: "cover",
-                            width: "11rem",
-                            maxHeight: "100%",
-                            justifyContent: "center",
+                  <Grid
+                    item
+                    xs={12}
+                    md={4}
+                    // spacing={3}
+                    // sx={{
+                    //   display: "flex",
+                    //   flexDirection: "column",
+                    //   justifyContent: "center",
+                    //   alignItems: "center",
+                    //   textAlign: "center",
+                    // }}
+                  >
+                    <Stack spacing={2}>
+                      <Stack>
+                        <Stack
+                          alignItems="center"
+                          sx={{
+                            bgcolor: theme.palette.primary.contrastText,
+                            p: 3,
                           }}
-                        />
-                        <h3 className="list-header">{BRAND}</h3>
-                      </Stack>
-                      {/* <p
+                        >
+                          <img
+                            src={Logo}
+                            alt="logo"
+                            style={{
+                              objectFit: "cover",
+                              width: "11rem",
+                              maxHeight: "100%",
+                              justifyContent: "center",
+                            }}
+                          />
+                          <h3 className="list-header">{BRAND}</h3>
+                        </Stack>
+                        {/* <p
                         className="paragraph--parsed"
                         style={{ textAlign: "center", marginTop: "1rem" }}
                       >
                         {shortestIntroText}
                       </p> */}
+                      </Stack>
+                      <TopOfLogoAd />
                     </Stack>
-                    <TopOfLogoAd />
-                  </Stack>
-                </Grid>
-                <Grid
-                  item
-                  xs={8}
-                  container
-                  sx={{
-                    p: 0,
-                    bgcolor: "transparent",
-                    borderRadius: "10px",
-                    justifyContent: "center",
-                    textAlign: "center",
-                    alignItems: "center",
-                    margin: "0 auto",
-                  }}
-                >
-                  <AuthorsAvatar />
-                </Grid>
-                <Grid item xs={12} md={8} sx={{ mt: 0 }}>
-                  {/* <PostsList /> */}
+                  </Grid>
                   <Grid
+                    item
+                    xs={8}
                     container
-                    spacing={4}
                     sx={{
-                      display: "flex",
-                      alignItems: "center",
+                      p: 0,
+                      bgcolor: "transparent",
+                      borderRadius: "10px",
+                      justifyContent: "center",
                       textAlign: "center",
-                      overflowY: "none",
-                      mt: 4,
-                      p: 1,
+                      alignItems: "center",
+                      margin: "0 auto",
                     }}
                   >
-                    <ImageList variant="masonry" cols={2} gap={8}>
-                      {mainPosts?.map((post) => (
-                        <ImageListItem item key={post?.id}>
-                          <PostCard post={post} />
-                        </ImageListItem>
-                      ))}
-                    </ImageList>
+                    <AuthorsAvatar />
                   </Grid>
-                </Grid>
-                <Grid
-                  item
-                  xs={12}
-                  md={4}
-                  sx={{ mt: 0, mx: { xs: 4, sm: 19, md: 0 } }}
-                >
-                  <Stack spacing={4}>
-                    <ShowTopsOfMasterpiecesComp />
-                    {/* <Stack sx={{ border: "1px solid #ccc", p: 1 }}>
+                  <Grid item xs={12} md={8} sx={{ mt: 0 }}>
+                    {/* <PostsList /> */}
+                    <Grid
+                      container
+                      spacing={4}
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        textAlign: "center",
+                        overflowY: "none",
+                        mt: 4,
+                        p: 1,
+                      }}
+                    >
+                      <ImageList variant="masonry" cols={2} gap={8}>
+                        {mainPosts?.map((post) => (
+                          <ImageListItem item key={post?.id}>
+                            <PostCard post={post} />
+                          </ImageListItem>
+                        ))}
+                      </ImageList>
+                    </Grid>
+                  </Grid>
+                  <Grid
+                    item
+                    xs={12}
+                    md={4}
+                    sx={{ mt: 0, mx: { xs: 4, sm: 19, md: 0 } }}
+                  >
+                    <Stack spacing={4}>
+                      <ShowTopsOfMasterpiecesComp />
+                      {/* <Stack sx={{ border: "1px solid #ccc", p: 1 }}>
                       <h4 className="list-header p-padding-bottom-small">
                         Kategoriler
                       </h4>
@@ -187,27 +186,30 @@ const MainPage = () => {
                         <CategoriesSideList key={c.id} category={c} />
                       ))}
                     </Stack> */}
-                    <Stack sx={{ border: "1px solid #ccc", p: 1 }}>
-                      <h4 className="list-header u-margin-bottom-small u-margin-top-small">
-                        Popüler Yazılar
-                      </h4>
-                      {postsLoading ? (
-                        <MainLoadingComp isLoading={postsLoading} />
-                      ) : postIsError ? (
-                        <ResourceNotFound
-                          isError={postIsError}
-                          error={postError}
-                        />
-                      ) : (
-                        sidePosts &&
-                        sidePosts?.map((p) => <SidePost key={p?.id} post={p} />)
-                      )}
+                      <Stack sx={{ border: "1px solid #ccc", p: 1 }}>
+                        <h4 className="list-header u-margin-bottom-small u-margin-top-small">
+                          Popüler Yazılar
+                        </h4>
+                        {postsLoading ? (
+                          <MainLoadingComp isLoading={postsLoading} />
+                        ) : postIsError ? (
+                          <ResourceNotFound
+                            isError={postIsError}
+                            error={postError}
+                          />
+                        ) : (
+                          sidePosts &&
+                          sidePosts?.map((p) => (
+                            <SidePost key={p?.id} post={p} />
+                          ))
+                        )}
+                      </Stack>
                     </Stack>
-                  </Stack>
+                  </Grid>
                 </Grid>
-              </Grid>
-              {sevenInfos?.length > 0 && <InfosCarousel data={sevenInfos} />}
-            </>
+                {sevenInfos?.length > 0 && <InfosCarousel data={sevenInfos} />}
+              </>
+            )}
           </MainPageLayout>
 
           <MiniFooter />
