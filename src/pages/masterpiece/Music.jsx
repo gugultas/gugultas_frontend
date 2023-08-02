@@ -1,10 +1,11 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import MainLayout from "../layouts/MainLayout";
-import { useGetMusicByIdQuery } from "../features/masterpiece/masterpieceSlice";
-import MasterpieceById from "../components/masterpiece/MasterpieceById";
-import MainLoadingComp from "../components/loading/MainLoadingComp";
 import { Helmet } from "react-helmet-async";
+
+import { useGetMusicByIdQuery } from "../../features/masterpiece/masterpieceSlice";
+import MainLayout from "../../layouts/MainLayout";
+import MainLoadingComp from "../../components/loading/MainLoadingComp";
+import MasterpieceById from "../../components/masterpiece/MasterpieceById";
 
 const Music = () => {
   const { id } = useParams();

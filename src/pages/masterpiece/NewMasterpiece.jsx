@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import FormPageLayout from "../layouts/FormPageLayout";
+import FormPageLayout from "../../layouts/FormPageLayout";
 import { MenuItem, TextField } from "@mui/material";
-import NewMasterpieceComp from "../components/masterpiece/NewMasterpieceComp";
+import NewMasterpieceComp from "../../components/masterpiece/NewMasterpieceComp";
 import { Helmet } from "react-helmet-async";
 
 const NewMasterpiece = () => {

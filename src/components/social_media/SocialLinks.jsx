@@ -1,7 +1,6 @@
 import { Link, Stack, useTheme } from "@mui/material";
 import React from "react";
 import {
-  BsFacebook,
   BsInstagram,
   BsReddit,
   BsTwitter,
@@ -35,9 +34,6 @@ const SocialLinks = ({ color, size }) => {
       alignItems="center"
       sx={{ mt: { xs: 0, md: 1 }, mx: { xs: 0, md: 3 } }}
     >
-      <Link href="https://www.facebook.com" sx={linkStyle}>
-        <BsFacebook size={navSize} />
-      </Link>
       <Link href={instaAccount} sx={linkStyle}>
         <BsInstagram size={navSize} />
       </Link>

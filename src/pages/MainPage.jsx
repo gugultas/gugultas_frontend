@@ -1,3 +1,5 @@
+import React from "react";
+import { Helmet } from "react-helmet-async";
 import {
   Grid,
   ImageList,
@@ -6,7 +8,6 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import React from "react";
 
 import ResourceNotFound from "../components/error/ResourceNotFound";
 import MainLoadingComp from "../components/loading/MainLoadingComp";
@@ -17,7 +18,6 @@ import PostCarousel from "../components/post-carousel/PostCarousel";
 import PlainPostCard from "../components/post-single/PlainPostCard";
 import SidePost from "../components/post-single/SidePost";
 import { RightSide } from "../components/sides/RightSide";
-import { BRAND } from "../config/constants";
 import {
   useGetFirstFivePostsQuery,
   useGetFourPostsForTopQuery,
@@ -26,17 +26,15 @@ import {
 } from "../features/posts/postSlice";
 import PostsList from "../features/posts/PostsList";
 import MainPageLayout from "../layouts/MainPageLayout";
-import Logo from "./../assets/img/logodnm4.png";
 import LogoCart from "../components/logo/LogoCart";
 import MiniFooter from "../components/footer/MiniFooter";
 import { shortestIntroText } from "../utils/shortestIntroText";
 import Navbar from "../components/navbar/Navbar";
-import ShowTopsOfMasterpiecesComp from "../components/masterpiece/ShowTopsOfMasterpiecesComp";
 import TopOfLogoAd from "../components/advertisements/TopOfLogoAd";
 import InfosCarousel from "../components/encyclopediaArticle/InfosCarousel";
 import { useGetLastSevenEncyclopediaArticlesQuery } from "../features/encyclopediaArticle/encyclopediaArticleSlice";
 import TopOfPageAd from "../components/advertisements/TopOfPageAd";
-import { Helmet } from "react-helmet-async";
+import RewardsPano from "../components/masterpiece/RewardsPano";
 
 const MainPage = () => {
   const theme = useTheme();
@@ -87,47 +85,9 @@ const MainPage = () => {
                   <Grid item xs={12} md={8}>
                     <PostCarousel posts={data} />
                   </Grid>
-                  <Grid
-                    item
-                    xs={12}
-                    md={4}
-                    // spacing={3}
-                    // sx={{
-                    //   display: "flex",
-                    //   flexDirection: "column",
-                    //   justifyContent: "center",
-                    //   alignItems: "center",
-                    //   textAlign: "center",
-                    // }}
-                  >
+                  <Grid item xs={12} md={4}>
                     <Stack spacing={2}>
-                      <Stack>
-                        <Stack
-                          alignItems="center"
-                          sx={{
-                            bgcolor: theme.palette.primary.contrastText,
-                            p: 3,
-                          }}
-                        >
-                          <img
-                            src={Logo}
-                            alt="logo"
-                            style={{
-                              objectFit: "cover",
-                              width: "11rem",
-                              maxHeight: "100%",
-                              justifyContent: "center",
-                            }}
-                          />
-                          <h3 className="list-header">{BRAND}</h3>
-                        </Stack>
-                        {/* <p
-                        className="paragraph--parsed"
-                        style={{ textAlign: "center", marginTop: "1rem" }}
-                      >
-                        {shortestIntroText}
-                      </p> */}
-                      </Stack>
+                      <RewardsPano />
                       <TopOfLogoAd />
                     </Stack>
                   </Grid>
@@ -177,15 +137,6 @@ const MainPage = () => {
                     sx={{ mt: 0, mx: { xs: 4, sm: 19, md: 0 } }}
                   >
                     <Stack spacing={4}>
-                      <ShowTopsOfMasterpiecesComp />
-                      {/* <Stack sx={{ border: "1px solid #ccc", p: 1 }}>
-                      <h4 className="list-header p-padding-bottom-small">
-                        Kategoriler
-                      </h4>
-                      {categories?.map((c) => (
-                        <CategoriesSideList key={c.id} category={c} />
-                      ))}
-                    </Stack> */}
                       <Stack sx={{ border: "1px solid #ccc", p: 1 }}>
                         <h4 className="list-header u-margin-bottom-small u-margin-top-small">
                           Popüler Yazılar
@@ -236,15 +187,13 @@ const MainPage = () => {
                 textAlign: "center",
               }}
             >
-              <Stack>
-                <LogoCart />
-                <p
-                  style={{ textAlign: "center", marginTop: "1rem" }}
-                  className="paragraph--parsed p-padding-right-medium p-padding-left-medium"
-                >
-                  {shortestIntroText}
-                </p>
-              </Stack>
+              <LogoCart />
+              <p
+                style={{ textAlign: "center", marginTop: "1rem" }}
+                className="paragraph--parsed p-padding-right-medium p-padding-left-medium"
+              >
+                {shortestIntroText}
+              </p>
             </Grid>
           </Grid>
           <TopOfLogoAd />

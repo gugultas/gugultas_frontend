@@ -257,6 +257,14 @@ export const postsApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: [{ type: "Post", id: "LIST" }],
     }),
+    // Admin
+    deletePostForEditor: builder.mutation({
+      query: (id) => ({
+        url: "/posts/administration/deletePost/" + id,
+        method: "delete",
+      }),
+      invalidatesTags: [{ type: "Post", id: "LIST" }],
+    }),
   }),
 });
 
@@ -281,4 +289,5 @@ export const {
   useLikePostMutation,
   useAddPostForEditorMutation,
   useUpdatePostForEditorMutation,
+  useDeletePostForEditorMutation,
 } = postsApiSlice;

@@ -29,15 +29,19 @@ import SingleMail from "./pages/SingleMail";
 import PostsBySubCategoryPage from "./pages/PostsBySubCategoryPage";
 import Activation from "./pages/Activation";
 import ResetPassword from "./pages/ResetPassword";
-import NewMasterpiece from "./pages/NewMasterpiece";
-import Music from "./pages/Music";
-import Picture from "./pages/Picture";
-import Movie from "./pages/Movie";
 import NewEncyclopediaArticle from "./pages/NewEncyclopediaArticle";
 import EncyclopediaArticles from "./pages/EncyclopediaArticles";
 import EncyclopediaArticle from "./pages/EncyclopediaArticle";
 import Playlist from "./pages/Playlist";
 import Search from "./pages/Search";
+import Masterpieces from "./pages/masterpiece/Masterpieces";
+import Music from "./pages/masterpiece/Music";
+import Picture from "./pages/masterpiece/Picture";
+import Movie from "./pages/masterpiece/Movie";
+import NewMasterpiece from "./pages/masterpiece/NewMasterpiece";
+import Movies from "./pages/masterpiece/Movies";
+import Pictures from "./pages/masterpiece/Pictures";
+import Musics from "./pages/masterpiece/Musics";
 
 const ROLES = {
   User: "ROLE_USER",
@@ -69,14 +73,21 @@ const ApplicationRoute = () => {
             <Route path="construction" element={<Construction />} />
             <Route path="/activation/:token" element={<Activation />} />
             <Route path="/resetPassword/:token" element={<ResetPassword />} />
-            <Route path="/musicById/:id" element={<Music />} />
-            <Route path="/pictureById/:id" element={<Picture />} />
-            <Route path="/movieById/:id" element={<Movie />} />
+
             <Route path="/:username/playlists/:id" element={<Playlist />} />
             <Route path="/search" element={<Search />} />
             <Route path="/infos">
               <Route index element={<EncyclopediaArticles />} />
               <Route path=":id" element={<EncyclopediaArticle />} />
+            </Route>
+            <Route path="eserler">
+              <Route index element={<Masterpieces />} />
+              <Route path="musicById/:id" element={<Music />} />
+              <Route path="pictureById/:id" element={<Picture />} />
+              <Route path="movieById/:id" element={<Movie />} />
+              <Route path="tüm-filmler" element={<Movies />} />
+              <Route path="tüm-resimler" element={<Pictures />} />
+              <Route path="tüm-muzikler" element={<Musics />} />
             </Route>
             <Route path="/posts">
               <Route index element={<Home />} />
@@ -180,7 +191,7 @@ const ApplicationRoute = () => {
                   </RequireAuth>
                 }
               />
-              <Route path="masterpieces">
+              <Route path="eser-ekle">
                 <Route
                   index
                   element={

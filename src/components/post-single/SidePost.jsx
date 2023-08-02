@@ -48,7 +48,7 @@ const SidePost = ({ post }) => {
                 sx={{ fontSize: 13 }}
                 component="div"
               >
-                {post?.title?.length > 22 ? post.title?.substring(0,22) + "..." : post.title}
+                {post?.title?.length > 30 ? post.title?.substring(0,30) + "..." : post.title}
               </Typography>
               <Box
                 sx={{

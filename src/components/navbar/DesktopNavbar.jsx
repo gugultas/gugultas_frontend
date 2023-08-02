@@ -133,7 +133,14 @@ const DesktopNavbar = () => {
           >
             <h3 className="list-header">{BRAND}</h3>
           </Link>
-          <Box sx={{ flexGrow: 1, display: "flex", mx: {md:1,lg:3}, alignItems:"center" }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: "flex",
+              mx: { md: 1, lg: 3 },
+              alignItems: "center",
+            }}
+          >
             {pages.map((page) => (
               <Button
                 key={page.id}
@@ -164,7 +171,7 @@ const DesktopNavbar = () => {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              gap:1
+              gap: 1,
             }}
           >
             <SocialLinksMenu />
@@ -251,21 +258,19 @@ const DesktopNavbar = () => {
                       </Link>
                     </MenuItem>
                     <MenuItem onClick={handleCloseUserMenu}>
-                      <Link to={`/administration/masterpieces`}>
-                        <Typography textAlign="center">Eserler</Typography>
+                      <Link to={`/administration/eser-ekle`}>
+                        <Typography textAlign="center">Eser-Ekle</Typography>
+                      </Link>
+                    </MenuItem>
+                    <MenuItem onClick={handleCloseUserMenu}>
+                      <Link to={`/administration/mails`}>
+                        <Typography textAlign="center">Mail Sayfası</Typography>
                       </Link>
                     </MenuItem>
                   </div>
                 )}
                 {isAdmin(userRoles) && (
                   <div>
-                    <MenuItem onClick={handleCloseUserMenu}>
-                      <Link to={`/editor/infos`}>
-                        <Typography textAlign="center">
-                          Yeni Bilgi Ekle
-                        </Typography>
-                      </Link>
-                    </MenuItem>
                     <MenuItem onClick={handleCloseUserMenu}>
                       <Link to={`/administration/users`}>
                         <Typography textAlign="center">Kullanıcılar</Typography>
@@ -277,20 +282,10 @@ const DesktopNavbar = () => {
                       </Link>
                     </MenuItem>
                     <MenuItem onClick={handleCloseUserMenu}>
-                      <Link to={`/administration/masterpieces`}>
-                        <Typography textAlign="center">Eserler</Typography>
-                      </Link>
-                    </MenuItem>
-                    <MenuItem onClick={handleCloseUserMenu}>
                       <Link to={`/administration/deactivatedPosts`}>
                         <Typography textAlign="center">
                           Deaktif Yazılar
                         </Typography>
-                      </Link>
-                    </MenuItem>
-                    <MenuItem onClick={handleCloseUserMenu}>
-                      <Link to={`/administration/mails`}>
-                        <Typography textAlign="center">Mail Sayfası</Typography>
                       </Link>
                     </MenuItem>
                   </div>

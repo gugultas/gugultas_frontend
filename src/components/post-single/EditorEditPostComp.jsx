@@ -51,7 +51,6 @@ const EditorEditPostComp = ({ post, categories }) => {
     subCategories ? subCategories[subCategories?.length - 1].name : null
   );
 
-  console.log(post)
   const [subCategory, setSubCategory] = useState(post?.subCategory ? post.subCategory : "");
 
 

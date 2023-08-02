@@ -10,7 +10,7 @@ const MasterpieceById = ({ data }) => {
 
   return (
     <Stack spacing={4} sx={{ p: { xs: 0.5, md: 1.5 } }}>
-      <h2 className="heading-secondary p-padding-top-medium">{data.title}</h2>
+      <h2 className="heading-secondary p-padding-top-medium">{data?.title}</h2>
 
       <img
         src={imageUrl}
@@ -20,7 +20,7 @@ const MasterpieceById = ({ data }) => {
 
       <p className="paragraph--parsed">
         {data?.info
-          ? parseHtmlText(data.info)
+          ? parseHtmlText(data?.info)
           : "Tanıtım metni henüz eklenmemiştir."}
       </p>
 

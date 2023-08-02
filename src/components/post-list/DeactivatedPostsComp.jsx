@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { useActivatePostMutation } from "../../features/posts/postSlice";
 import { useNavigate } from "react-router-dom";
+import DeletePostComp from "../post-single/DeletePostComp";
 
 const DeactivatedPostsComp = ({ posts }) => {
   const navigate = useNavigate();
@@ -31,14 +32,15 @@ const DeactivatedPostsComp = ({ posts }) => {
           <ListItem
             key={value}
             secondaryAction={
-              <IconButton
-                edge="end"
-                aria-label="posts"
-                onClick={() => activeHandler(value?.id)}
-                disabled={isLoading}
-              >
-                <GiConfirmed />
-              </IconButton>
+              <Stack direction="row" spacing={2}>
+                <IconButton
+                  onClick={() => activeHandler(value?.id)}
+                  disabled={isLoading}
+                >
+                  <GiConfirmed color="green" />
+                </IconButton>
+                <DeletePostComp id={value?.id} />
+              </Stack>
             }
             sx={{ mb: 3 }}
           >

@@ -48,15 +48,15 @@ export const playlistSlice = apiSlice.injectEndpoints({
         method: "put",
         body: reqBody,
       }),
-      invalidatesTags: [{ type: "Playlist", id: "LIST" }],
+      invalidatesTags: [{ type: "Post", id: "LIST" }],
     }),
-    removePostToPlaylist: builder.mutation({
+    removePostFromPlaylist: builder.mutation({
       query: (reqBody) => ({
         url: "/playlists/removePostFromPlaylist",
         method: "put",
         body: reqBody,
       }),
-      invalidatesTags: [{ type: "Playlist", id: "LIST" }],
+      invalidatesTags: [{ type: "Post", id: "LIST" }],
     }),
   }),
 });
@@ -68,5 +68,5 @@ export const {
   useGetPlaylistsByAuthorQuery,
   useGetPlaylistsByIdQuery,
   useAddPostToPlaylistMutation,
-  useRemovePostToPlaylistMutation,
+  useRemovePostFromPlaylistMutation,
 } = playlistSlice;

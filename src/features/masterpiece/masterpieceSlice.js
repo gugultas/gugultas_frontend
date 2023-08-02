@@ -101,6 +101,27 @@ export const masterpieceSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: [{ type: "Masterpiece", id: "LIST" }],
     }),
+    getMusicsAll: builder.query({
+      query: (id) => ({
+        url: "/musics/getMasterpieces",
+        method: "get",
+      }),
+      providesTags: [{ type: "Masterpiece", id: "LIST" }],
+    }),
+    getPicturesAll: builder.query({
+      query: (id) => ({
+        url: "/pictures/getMasterpieces",
+        method: "get",
+      }),
+      providesTags: [{ type: "Masterpiece", id: "LIST" }],
+    }),
+    getMoviesAll: builder.query({
+      query: (id) => ({
+        url: "/movies/getMasterpieces",
+        method: "get",
+      }),
+      providesTags: [{ type: "Masterpiece", id: "LIST" }],
+    }),
   }),
 });
 
@@ -117,4 +138,7 @@ export const {
   useUpdateMusicByIdMutation,
   useUpdatePictureByIdMutation,
   useUpdateMovieByIdMutation,
+  useGetMoviesAllQuery,
+  useGetMusicsAllQuery,
+  useGetPicturesAllQuery,
 } = masterpieceSlice;

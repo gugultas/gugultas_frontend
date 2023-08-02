@@ -69,7 +69,7 @@ const SignInForm = () => {
           accessToken: response?.data?.accessToken,
           username: response?.data?.username,
           userRoles: response?.data?.roles,
-          image: response?.data?.imageId,
+          image: response?.data?.image,
           imageExist: response?.data?.imageExist,
         })
       );

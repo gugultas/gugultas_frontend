@@ -1,6 +1,6 @@
 import React from "react";
 import { TbSocial } from "react-icons/tb";
-import { BsFacebook, BsInstagram, BsReddit, BsTwitter, BsYoutube } from "react-icons/bs";
+import { BsInstagram, BsReddit, BsTwitter, BsYoutube } from "react-icons/bs";
 import { IconButton, Link, Menu, Stack, useTheme } from "@mui/material";
 import { instaAccount, redditAccount, twitterAccount, youtubeAccount } from "../../config/constants";
 
@@ -55,9 +55,6 @@ const SocialLinksMenu = ({ color, size }) => {
         // transformOrigin={{ horizontal: "right", vertical: "top" }}
       >
         <Stack direction="column" spacing={2} sx={{ px: 1, py: 1 }}>
-          <Link href="https://www.facebook.com" sx={linkStyle}>
-            <BsFacebook size={navSize} />
-          </Link>
           <Link href={instaAccount} sx={linkStyle}>
             <BsInstagram size={navSize} />
           </Link>

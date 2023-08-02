@@ -128,7 +128,7 @@ const UpdateMasterpiece = ({ data, genre }) => {
   return (
     <>
       <IconButton onClick={handleClickOpen}>
-        <MdOutlineEdit />
+        <MdOutlineEdit color="white" />
       </IconButton>
       <Dialog open={open} onClose={handleClose} maxWidth="lg">
         <DialogTitle

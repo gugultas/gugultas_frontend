@@ -20,7 +20,7 @@ const PostCarousel = ({ posts }) => {
       // indicators={false}
       navButtonsAlwaysVisible
       sx={{ borderRadius: "0px" }}
-      duration={600}
+      duration={900}
     >
       {posts?.map((item, i) => (
         <Item key={i} item={item} />

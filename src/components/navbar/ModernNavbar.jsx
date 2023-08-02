@@ -380,8 +380,8 @@ const ModernNavbar = () => {
                 </Link>
               </MenuItem>
               <MenuItem>
-                <Link to={`/administration/masterpieces`} style={linkStyles}>
-                  <Typography textAlign="center">Eserler</Typography>
+                <Link to={`/administration/eser-ekle`} style={linkStyles}>
+                  <Typography textAlign="center">Eser Ekle</Typography>
                 </Link>
               </MenuItem>
             </div>

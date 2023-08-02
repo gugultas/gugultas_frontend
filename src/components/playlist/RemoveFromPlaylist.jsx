@@ -1,11 +1,13 @@
 import React from "react";
-import { useRemovePostToPlaylistMutation } from "../../features/playlist/playlistSlice";
-import { IconButton, Tooltip, Typography } from "@mui/material";
+import { useRemovePostFromPlaylistMutation } from "../../features/playlist/playlistSlice";
+import { IconButton } from "@mui/material";
 import { CgPlayListRemove } from "react-icons/cg";
+import { useNavigate } from "react-router-dom";
 
 const RemoveFromPlaylist = ({ postId, playlistId }) => {
+  const navigate = useNavigate();
   const [rmvPostFromPlaylist, { isLoading }] =
-    useRemovePostToPlaylistMutation();
+    useRemovePostFromPlaylistMutation();
 
   const onSubmitRemovePostFromPlaylist = async (e) => {
     e.preventDefault();
@@ -17,17 +19,19 @@ const RemoveFromPlaylist = ({ postId, playlistId }) => {
 
     const response = await rmvPostFromPlaylist(reqBody);
 
+    console.log(response);
+
     if (response?.error) {
       console.log(response?.error);
+    } else {
+      navigate(-1);
     }
   };
 
   return (
-    <Tooltip title={<Typography fontSize={10} >Oynatma listesinden kaldır</Typography>}>
-      <IconButton onClick={onSubmitRemovePostFromPlaylist} disabled={isLoading}>
-        <CgPlayListRemove size={17} />
-      </IconButton>
-    </Tooltip>
+    <IconButton onClick={onSubmitRemovePostFromPlaylist} disabled={isLoading}>
+      <CgPlayListRemove size={17} />
+    </IconButton>
   );
 };
 
