@@ -5,10 +5,14 @@ import { apiSlice } from "../api/apiSlice";
 export const postsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getPosts: builder.query({
-      query: () => ({ url: "/posts", method: "get" }),
+      query: ({ page }) => ({
+        url: `/posts?page=${page}&size=10`,
+        method: "get",
+      }),
       transformResponse: async (responseData) => {
+        const res = responseData;
         const posts = await Promise.all(
-          responseData?.map(async (p) => {
+          responseData?.posts?.map(async (p) => {
             await axiosPublic
               .get("/likes/likedUsersByPost/" + p?.id)
               .then((resp) => (p.likes = resp?.data))
@@ -16,9 +20,18 @@ export const postsApiSlice = apiSlice.injectEndpoints({
             return p;
           })
         );
-        return posts;
+        res.posts = posts;
+        return res;
       },
-      providesTags: [{ type: "Post", id: "LIST" }],
+      serializeQueryArgs: ({ endpointName, queryArgs }) => {
+        return `${endpointName}-${queryArgs?.page}`;
+      },
+      // Refetch when the page arg changes
+      forceRefetch({ currentArg, previousArg }) {
+        return currentArg !== previousArg?.page;
+      },
+
+      // providesTags: [{ type: "Post", id: "LIST" }],
     }),
     getFirstFivePosts: builder.query({
       query: () => ({
@@ -92,13 +105,14 @@ export const postsApiSlice = apiSlice.injectEndpoints({
       },
     }),
     getPostsByCategory: builder.query({
-      query: (categoryName) => ({
-        url: `/posts/getPostByCategory/${categoryName.toString()}`,
+      query: ({ categoryName, page, size }) => ({
+        url: `/posts/getPostByCategory/${categoryName.toString()}?page=${page}&size=${size}`,
         method: "get",
       }),
       transformResponse: async (responseData) => {
+        const res = responseData;
         const posts = await Promise.all(
-          responseData?.map(async (p) => {
+          responseData?.posts?.map(async (p) => {
             await axiosPublic
               .get("/likes/likedUsersByPost/" + p?.id)
               .then((resp) => (p.likes = resp?.data))
@@ -106,23 +120,26 @@ export const postsApiSlice = apiSlice.injectEndpoints({
             return p;
           })
         );
-        return posts;
+        res.posts = posts;
+        return res;
       },
-      providesTags: [
-        {
-          type: "Post",
-          id: "LIST",
-        },
-      ],
+      serializeQueryArgs: ({ endpointName, queryArgs }) => {
+        return `${endpointName}-${queryArgs?.page}`;
+      },
+      // Refetch when the page arg changes
+      forceRefetch({ currentArg, previousArg }) {
+        return currentArg !== previousArg?.page;
+      },
     }),
     getPostsBySubCategory: builder.query({
-      query: (subCategory) => ({
-        url: `/posts/getPostBySubCategory/${subCategory.toString()}`,
+      query: ({ subCategory, page, size }) => ({
+        url: `/posts/getPostBySubCategory/${subCategory.toString()}?page=${page}&size=${size}`,
         method: "get",
       }),
       transformResponse: async (responseData) => {
+        const res = responseData;
         const posts = await Promise.all(
-          responseData?.map(async (p) => {
+          responseData?.posts?.map(async (p) => {
             await axiosPublic
               .get("/likes/likedUsersByPost/" + p?.id)
               .then((resp) => (p.likes = resp?.data))
@@ -130,23 +147,26 @@ export const postsApiSlice = apiSlice.injectEndpoints({
             return p;
           })
         );
-        return posts;
+        res.posts = posts;
+        return res;
       },
-      providesTags: [
-        {
-          type: "Post",
-          id: "LIST",
-        },
-      ],
+      serializeQueryArgs: ({ endpointName, queryArgs }) => {
+        return `${endpointName}-${queryArgs?.page}`;
+      },
+      // Refetch when the page arg changes
+      forceRefetch({ currentArg, previousArg }) {
+        return currentArg !== previousArg?.page;
+      },
     }),
     getPostsByAuthor: builder.query({
-      query: (username) => ({
-        url: `/posts/getPostsByAuthor/${username}`,
+      query: ({ username, page, size }) => ({
+        url: `/posts/getPostsByAuthor/${username}?page=${page}&size=${size}`,
         method: "get",
       }),
       transformResponse: async (responseData) => {
+        const res = responseData;
         const posts = await Promise.all(
-          responseData?.map(async (p) => {
+          responseData?.posts?.map(async (p) => {
             await axiosPublic
               .get("/likes/likedUsersByPost/" + p?.id)
               .then((resp) => (p.likes = resp?.data))
@@ -154,9 +174,16 @@ export const postsApiSlice = apiSlice.injectEndpoints({
             return p;
           })
         );
-        return posts;
+        res.posts = posts;
+        return res;
       },
-      providesTags: (result, error, id) => [{ type: "Post", id }],
+      serializeQueryArgs: ({ endpointName, queryArgs }) => {
+        return `${endpointName}-${queryArgs?.page}`;
+      },
+      // Refetch when the page arg changes
+      forceRefetch({ currentArg, previousArg }) {
+        return currentArg !== previousArg?.page;
+      },
     }),
     getDeactivatedPosts: builder.query({
       query: () => ({
@@ -188,6 +215,18 @@ export const postsApiSlice = apiSlice.injectEndpoints({
         url: "/posts/searchPosts/" + title,
         method: "get",
       }),
+      transformResponse: async (responseData) => {
+        const posts = await Promise.all(
+          responseData?.map(async (p) => {
+            await axiosPublic
+              .get("/likes/likedUsersByPost/" + p?.id)
+              .then((resp) => (p.likes = resp?.data))
+              .catch((err) => console.log(err));
+            return p;
+          })
+        );
+        return posts;
+      },
       providesTags: [{ type: "Post", id: "LIST" }],
     }),
     addPost: builder.mutation({

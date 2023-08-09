@@ -49,10 +49,10 @@ const SinglePostComp = ({ post, comments }) => {
         <title>{post?.title + " | Yazı"}</title>
         <meta name="description" description={post?.subtitle + " " + post?.title + " dergi yazısı"} />
       </Helmet>
-      <h2 className="heading-secondary p-padding-top-medium">{post.title}</h2>
+      <h2 className="post-header p-padding-top-medium">{post.title}</h2>
 
       <h4 className="heading-tertiary" style={{ textAlign: "left" }}>
-        {post.subtitle}
+        {post?.subtitle}
       </h4>
       <p className="paragraph--parsed">{parseHtmlText(post?.content)}</p>
 

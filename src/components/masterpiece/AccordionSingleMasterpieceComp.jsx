@@ -115,7 +115,7 @@ const AccordionSingleMasterpieceComp = ({
               )}
             </Box>
           ) : (
-            <h4 className="list-header white">Henüz Belirlenmedi.</h4>
+            <h4 className="paragraph white">Henüz Belirlenmedi.</h4>
           )}
         </AccordionDetails>
       </Accordion>

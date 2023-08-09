@@ -9,8 +9,8 @@ const TopOfPageAd = () => {
           sx={{
             height: "110px",
             maxWidth: "100%",
-            bgcolor: "transparent",
-            border: "1px solid black",
+            bgcolor: "white",
+            border: { xs: "none", md: "1px solid black" },
             boxShadow: { xs: "none", md: "3px 5px #4f4b4b" },
             display: "flex",
             flexDirection: "column",

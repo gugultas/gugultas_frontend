@@ -16,7 +16,6 @@ import DesktopNavbar from "../components/navbar/DesktopNavbar";
 import PostCard from "../components/post-card/PostCard";
 import PostCarousel from "../components/post-carousel/PostCarousel";
 import PlainPostCard from "../components/post-single/PlainPostCard";
-import SidePost from "../components/post-single/SidePost";
 import { RightSide } from "../components/sides/RightSide";
 import {
   useGetFirstFivePostsQuery,
@@ -33,7 +32,6 @@ import Navbar from "../components/navbar/Navbar";
 import TopOfLogoAd from "../components/advertisements/TopOfLogoAd";
 import InfosCarousel from "../components/encyclopediaArticle/InfosCarousel";
 import { useGetLastSevenEncyclopediaArticlesQuery } from "../features/encyclopediaArticle/encyclopediaArticleSlice";
-import TopOfPageAd from "../components/advertisements/TopOfPageAd";
 import RewardsPano from "../components/masterpiece/RewardsPano";
 
 const MainPage = () => {
@@ -75,7 +73,7 @@ const MainPage = () => {
               />
             ) : (
               <>
-                <Grid container spacing={5}>
+                <Grid container spacing={4}>
                   {fourPost?.map((a) => (
                     <Grid item md={3} key={a.id}>
                       <PlainPostCard post={a} />
@@ -136,25 +134,21 @@ const MainPage = () => {
                     md={4}
                     sx={{ mt: 0, mx: { xs: 4, sm: 19, md: 0 } }}
                   >
-                    <Stack spacing={4}>
-                      <Stack sx={{ border: "1px solid #ccc", p: 1 }}>
-                        <h4 className="list-header u-margin-bottom-small u-margin-top-small">
-                          Popüler Yazılar
-                        </h4>
-                        {postsLoading ? (
-                          <MainLoadingComp isLoading={postsLoading} />
-                        ) : postIsError ? (
-                          <ResourceNotFound
-                            isError={postIsError}
-                            error={postError}
-                          />
-                        ) : (
-                          sidePosts &&
-                          sidePosts?.map((p) => (
-                            <SidePost key={p?.id} post={p} />
-                          ))
-                        )}
-                      </Stack>
+                    <Stack spacing={2} sx={{ p: 1 }}>
+                      <h4 className="list-header">Popüler Yazılar</h4>
+                      {postsLoading ? (
+                        <MainLoadingComp isLoading={postsLoading} />
+                      ) : postIsError ? (
+                        <ResourceNotFound
+                          isError={postIsError}
+                          error={postError}
+                        />
+                      ) : (
+                        sidePosts &&
+                        sidePosts?.map((p) => (
+                          <PlainPostCard key={p?.id} post={p} />
+                        ))
+                      )}
                     </Stack>
                   </Grid>
                 </Grid>
@@ -196,12 +190,10 @@ const MainPage = () => {
               </p>
             </Grid>
           </Grid>
-          <TopOfLogoAd />
           {sevenInfos?.length > 0 && <InfosCarousel data={sevenInfos} />}
           <div className="container">
             <Stack spacing={2} sx={{ p: 1, pt: 3 }} alignItems="center">
               <PostsList propData={fourPost} />
-              <TopOfPageAd />
               <PostsList propData={mainPosts} />
             </Stack>
             <RightSide />

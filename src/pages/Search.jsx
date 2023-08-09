@@ -3,9 +3,9 @@ import { selectSearchBar } from "../features/search/searchSlice";
 import { useSelector } from "react-redux";
 import { useSearchPostsQuery } from "../features/posts/postSlice";
 import MainLayout from "../layouts/MainLayout";
-import PostsList from "../features/posts/PostsList";
 import MainLoadingComp from "../components/loading/MainLoadingComp";
 import { Helmet } from "react-helmet-async";
+import PostListLoadByScrollComp from "../components/post-list/PostListLoadByScrollComp";
 
 const Search = () => {
   const searchText = useSelector(selectSearchBar);
@@ -19,12 +19,13 @@ const Search = () => {
         <meta name="description" description={data?.description} />
       </Helmet>
       <h3 className="heading-secondary u-margin-bottom-medium">Arama Sayfası</h3>
+      <p className="paragraph">Her sayfaya yeniden gelişinizde bir önceki aramanızın sonuçları listelenir.</p>
       {isLoading ? (
         <MainLoadingComp isLoading={isLoading} />
       ) : data?.length < 1 ? (
         <h3 className="list-header">Yazı bulunamadı.</h3>
       ) : (
-        <PostsList propData={data} />
+        <PostListLoadByScrollComp searchData={data} />
       )}
     </MainLayout>
   );

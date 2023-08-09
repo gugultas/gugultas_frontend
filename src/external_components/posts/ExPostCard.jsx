@@ -24,6 +24,8 @@ import { isAuthor, isEditor } from "../../validation/conditions/checkRole";
 import { BASE_URL, photosApiUrl } from "../../config/urls";
 import { checkImageExist } from "../../validation/conditions/checkImageExist";
 import RemoveFromPlaylist from "../../components/playlist/RemoveFromPlaylist";
+import { MdReadMore } from "react-icons/md";
+import PostReviewComp from "../../components/post-single/PostReviewComp";
 
 export default function ExPostCard({
   post,
@@ -37,7 +39,6 @@ export default function ExPostCard({
     post?.profileImageType
   );
   const [anchorEl, setAnchorEl] = React.useState(null);
-
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -222,7 +223,7 @@ export default function ExPostCard({
             gridArea: "footer",
             display: "flex",
             justifyContent: "space-between",
-            pt: 0.7,
+            pt: 1.7,
             pb: 2,
             color: "black",
           }}
@@ -236,9 +237,16 @@ export default function ExPostCard({
               <Typography sx={{ fontSize: 11 }}>{post.comments}</Typography>
             </Box>
           </Box>
-          <Link to={`/posts/${post.id}`} className="read-more-ex-post">
-            <Typography sx={{ fontSize: 11 }}>Devamını Oku...</Typography>
-          </Link>
+          <Stack direction="row" spacing={1}>
+            <PostReviewComp data={post} />
+            <IconButton
+              sx={{ width: 27, height: 27 }}
+              component={Link}
+              to={`/posts/${post.id}`}
+            >
+              <MdReadMore color="black" />
+            </IconButton>
+          </Stack>
         </Box>
       </Box>
     </Box>

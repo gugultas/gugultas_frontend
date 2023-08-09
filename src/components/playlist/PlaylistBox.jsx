@@ -68,7 +68,7 @@ const PlaylistBox = ({ data }) => {
           borderRadius: "10px",
         }}
       >
-        {moment(data?.updateDateTime).format("dddd MM/YY")}
+        {"Güncellenme Tarihi : " + moment(data?.updateDateTime).format("dddd MM/YY")}
       </Typography>
     </Stack>
   );

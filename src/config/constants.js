@@ -1,3 +1,4 @@
+export const POST_LIMIT_SIZE = 15;
 export const BRAND = "GUGULTAŞ";
 export const googleMail = "gugultasofficial@gmail.com";
 export const outlookMail = "gugultas@outlook.com";

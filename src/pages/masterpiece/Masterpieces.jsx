@@ -54,27 +54,28 @@ const Masterpieces = () => {
         ulaşabileceğiniz linkler yer almaktadır.
       </p>
 
-      {(isMscLdng || isPctrLdng || isMvLdng) && (
+      {isMscLdng || isPctrLdng || isMvLdng ? (
         <MainLoadingComp isLoading={isMscLdng || isPctrLdng || isMvLdng} />
+      ) : (
+        <Stack spacing={3}>
+          <AccordionSingleMasterpieceComp
+            data={music}
+            genre="music"
+            bgColor="#dd159e7b"
+          />
+          <AccordionSingleMasterpieceComp
+            data={picture}
+            genre="picture"
+            bgColor="#bbb42a7a"
+          />
+          <AccordionSingleMasterpieceComp
+            data={movie}
+            genre="movie"
+            bgColor="#1a87b979"
+          />
+          <AccessOfMasterpieceHistoryLinksComp />
+        </Stack>
       )}
-      <Stack spacing={3}>
-        <AccordionSingleMasterpieceComp
-          data={music}
-          genre="music"
-          bgColor="#dd159e7b"
-        />
-        <AccordionSingleMasterpieceComp
-          data={picture}
-          genre="picture"
-          bgColor="#bbb42a7a"
-        />
-        <AccordionSingleMasterpieceComp
-          data={movie}
-          genre="movie"
-          bgColor="#1a87b979"
-        />
-        <AccessOfMasterpieceHistoryLinksComp />
-      </Stack>
     </ProfileLayout>
   );
 };

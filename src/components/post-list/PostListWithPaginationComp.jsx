@@ -1,27 +1,22 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
-  useTheme,
-  useMediaQuery,
   Grid,
-  Stack,
   Pagination,
+  Stack,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 
-import MainLoadingComp from "../../components/loading/MainLoadingComp";
-import PostCard from "../../components/post-card/PostCard";
+import { useGetPostsQuery } from "./postSlice";
 import ExPostCard from "../../external_components/posts/ExPostCard";
-import NoPostInList from "../../components/error/NoPostInList";
+import PostCard from "../../components/post-card/PostCard";
+import MainLoadingComp from "../../components/loading/MainLoadingComp";
 import ResourceNotFound from "../../components/error/ResourceNotFound";
-import { useGetPostsBySubCategoryQuery } from "../posts/postSlice";
-import { POST_LIMIT_SIZE } from "../../config/constants";
-import { useParams } from "react-router-dom";
 
-const PostsBySubCategory = ({ subCategory }) => {
-  const { categoryName } = useParams();
+const PostListWithPaginationComp = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("lg"));
   const matchesTab = useMediaQuery(theme.breakpoints.between("sm", "md"));
-
   const [page, setPage] = useState(1);
 
   const {
@@ -30,10 +25,8 @@ const PostsBySubCategory = ({ subCategory }) => {
     isSuccess,
     isError,
     error,
-  } = useGetPostsBySubCategoryQuery({
-    subCategory,
+  } = useGetPostsQuery({
     page: page - 1,
-    size: POST_LIMIT_SIZE,
   });
 
   const handleChange = (event, value) => {
@@ -41,7 +34,7 @@ const PostsBySubCategory = ({ subCategory }) => {
     setPage(value);
   };
 
-  const data = fetchedPosts?.posts;
+  const allPost = fetchedPosts?.posts;
 
   let content;
   if (isLoading) {
@@ -50,15 +43,17 @@ const PostsBySubCategory = ({ subCategory }) => {
     content = <ResourceNotFound isError={isError} error={error} />;
   } else if (isSuccess) {
     if (matches) {
-      if (data?.length === 0) {
-        content = <NoPostInList />;
+      if (allPost?.length === 0) {
+        content = "";
       } else {
-        content = data.map((post) => <ExPostCard key={post.id} post={post} />);
+        content = allPost?.map((post) => (
+          <ExPostCard key={post.id} post={post} />
+        ));
       }
     } else if (matchesTab) {
       content = (
         <Grid container sx={{ mb: 5 }}>
-          {data?.map((p) => (
+          {allPost?.map((p) => (
             <Grid sm={6} key={p?.id}>
               <PostCard post={p} />
             </Grid>
@@ -66,19 +61,18 @@ const PostsBySubCategory = ({ subCategory }) => {
         </Grid>
       );
     } else {
-      if (data?.length < 1) {
-        content = <NoPostInList />;
+      if (allPost?.length < 1) {
+        content = "";
       } else {
-        content = data.map((post) => <PostCard key={post.id} post={post} />);
+        content = allPost?.map((post) => (
+          <PostCard key={post.id} post={post} />
+        ));
       }
     }
   }
 
   return (
     <>
-      <h3 className="list-header">
-        {categoryName + " - " + fetchedPosts?.title}
-      </h3>
       {content}
       <Stack spacing={2}>
         <Pagination
@@ -94,4 +88,4 @@ const PostsBySubCategory = ({ subCategory }) => {
   );
 };
 
-export default PostsBySubCategory;
+export default PostListWithPaginationComp;

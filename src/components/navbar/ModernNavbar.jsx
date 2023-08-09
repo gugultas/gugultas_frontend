@@ -172,20 +172,23 @@ const ModernNavbar = () => {
         </BootstrapTooltip>
 
         {/* Settings */}
-        {username && isAuthor(userRoles) && (
-          <BootstrapTooltip title="Ayarlar" placement="right">
-            <IconButton
-              onClick={handleSettingsClick}
-              aria-controls={settingsOpen ? "settings" : undefined}
-              aria-haspopup="true"
-              aria-expanded={settingsOpen ? "true" : undefined}
-              size="large"
-              sx={iconStyle}
-            >
-              <AiOutlineSetting style={{ fontSize: "1.9rem" }} />
-            </IconButton>
-          </BootstrapTooltip>
-        )}
+        {username &&
+          (isAuthor(userRoles) ||
+            isEditor(userRoles) ||
+            isAdmin(userRoles)) && (
+            <BootstrapTooltip title="Ayarlar" placement="right">
+              <IconButton
+                onClick={handleSettingsClick}
+                aria-controls={settingsOpen ? "settings" : undefined}
+                aria-haspopup="true"
+                aria-expanded={settingsOpen ? "true" : undefined}
+                size="large"
+                sx={iconStyle}
+              >
+                <AiOutlineSetting style={{ fontSize: "1.9rem" }} />
+              </IconButton>
+            </BootstrapTooltip>
+          )}
 
         {/* Authentication */}
         {!username && (
@@ -309,7 +312,7 @@ const ModernNavbar = () => {
             </MenuItem>
           ))}
       </Menu>
-      {isAuthor(userRoles) && (
+      {(isAuthor(userRoles) || isEditor(userRoles) || isAdmin(userRoles)) && (
         <Menu
           anchorEl={settings}
           id="settings"

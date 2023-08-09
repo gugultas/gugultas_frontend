@@ -2,25 +2,19 @@ import * as React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import {
-  Box,
-  IconButton,
-  Stack,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { Box, IconButton, Stack, useMediaQuery, useTheme } from "@mui/material";
 import { MdCalendarToday, MdModeComment } from "react-icons/md";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { BiCategory } from "react-icons/bi";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import "react-lazy-load-image-component/src/effects/blur.css";
+import { useSelector } from "react-redux";
 
 import LikeComp from "../like/LikeComp";
 import { BASE_URL, photosApiUrl } from "../../config/urls";
 import { isAuthor } from "../../validation/conditions/checkRole";
 import { selectCurrentUserRoles } from "../../features/auth/authSlice";
-import { useSelector } from "react-redux";
 import RemoveFromPlaylist from "../playlist/RemoveFromPlaylist";
 
 export default function PostCard({
@@ -57,7 +51,7 @@ export default function PostCard({
           src={postImage}
           alt="post media"
           style={{
-            height: matches ? "280px" : "200px",
+            height: matches ? "230px" : "200px",
             maxWidth: matches ? "100%" : 250,
             width: "100%",
           }}
