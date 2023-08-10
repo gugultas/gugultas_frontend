@@ -2,7 +2,11 @@ import * as React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
-import { AiOutlineLogout, AiOutlineMenu } from "react-icons/ai";
+import {
+  AiOutlineLogout,
+  AiOutlineMenu,
+  AiOutlineUnorderedList,
+} from "react-icons/ai";
 import { BiCategory } from "react-icons/bi";
 import {
   MdExpandLess,
@@ -40,7 +44,7 @@ import useLogout from "../../hooks/useLogout.hook";
 import { BRAND } from "../../config/constants";
 import { BASE_URL, photosApiUrl } from "../../config/urls";
 import { stringAvatar } from "../../utils/CustomProfileImage";
-import SearchBar from "./SearchBar";
+import SearchBarSpecial from "./SearchBarSpecial";
 
 const drawerWidth = 200;
 
@@ -114,6 +118,9 @@ export default function Navbar(props) {
       <Divider />
 
       <List sx={{ bgcolor: "#f0eeee" }}>
+        {/* Search Box */}
+        <SearchBarSpecial />
+
         {/* Authors */}
         <ListItemButton onClick={handleAuthorClick}>
           <ListItemIcon sx={{ fontSize: 20 }}>
@@ -172,6 +179,9 @@ export default function Navbar(props) {
             color: "#073b6b",
           }}
         >
+          <ListItemIcon sx={{ fontSize: 20 }}>
+            <AiOutlineUnorderedList />
+          </ListItemIcon>
           <Link to="/posts">
             <ListItemText primary="Tüm Yazılar!" />
           </Link>
@@ -251,10 +261,6 @@ export default function Navbar(props) {
             <ListItemText primary="Çıkış Yap" />
           </ListItemButton>
         )}
-
-        <ListItemButton>
-          <SearchBar />
-        </ListItemButton>
       </List>
     </div>
   );

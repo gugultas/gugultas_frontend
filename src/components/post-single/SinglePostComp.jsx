@@ -10,6 +10,7 @@ import {
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Helmet } from "react-helmet-async";
 
 import PostFooter from "./PostFooter";
 import AddComment from "../comment/AddComment";
@@ -21,7 +22,7 @@ import { stringAvatar } from "../../utils/CustomProfileImage";
 import { checkImageExist } from "../../validation/conditions/checkImageExist";
 import LastFivePostsOfAuthorComp from "../post-list/LastFivePostsOfAuthorComp";
 import SharePost from "../share/SharePost";
-import { Helmet } from "react-helmet-async";
+
 
 const SinglePostComp = ({ post, comments }) => {
   const theme = useTheme();
@@ -47,9 +48,18 @@ const SinglePostComp = ({ post, comments }) => {
     <Stack spacing={4} sx={{ p: { xs: 0.5, md: 1.5 } }}>
       <Helmet prioritizeSeoTags>
         <title>{post?.title + " | Yazı"}</title>
-        <meta name="description" description={post?.subtitle + " " + post?.title + " dergi yazısı"} />
+        <meta
+          name="description"
+          content={
+            post?.description
+              ? post?.description
+              : post?.subtitle
+              ? post?.subtitle
+              : post?.title
+          }
+        />
       </Helmet>
-      <h2 className="post-header p-padding-top-medium">{post.title}</h2>
+      <h2 className="post-header p-padding-top-medium">{post?.title}</h2>
 
       <h4 className="heading-tertiary" style={{ textAlign: "left" }}>
         {post?.subtitle}
@@ -127,7 +137,7 @@ const SinglePostComp = ({ post, comments }) => {
       <PostFooter
         postId={post?.id}
         likes={post?.likes}
-        comments={post.comments}
+        comments={post?.comments}
         createDateTime={post?.createDateTime}
       />
 

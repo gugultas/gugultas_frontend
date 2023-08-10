@@ -27,6 +27,7 @@ import EditorToolbar, {
   modules,
 } from "./../../utils/QuillEditorToolbar";
 import { useGetSubCategoriesByCategoryQuery } from "../../features/sub-categories/subCategorySlice";
+import MultilineFormField from "../form/MultilineFormField";
 
 const EditorEditPostComp = ({ post, categories }) => {
   const navigate = useNavigate();
@@ -37,9 +38,10 @@ const EditorEditPostComp = ({ post, categories }) => {
     image: "",
     title: post?.title,
     subtitle: post?.subtitle,
+    description: post?.description,
     imageProtect: true,
   });
-  const [category, setCategory] = useState( post?.category ? post.category : "");
+  const [category, setCategory] = useState(post?.category ? post.category : "");
   const [open, setOpen] = useState(false);
   const [progress, setProgress] = useState(false);
   const [content, setContent] = useState(post?.content);
@@ -51,8 +53,9 @@ const EditorEditPostComp = ({ post, categories }) => {
     subCategories ? subCategories[subCategories?.length - 1].name : null
   );
 
-  const [subCategory, setSubCategory] = useState(post?.subCategory ? post.subCategory : "");
-
+  const [subCategory, setSubCategory] = useState(
+    post?.subCategory ? post.subCategory : ""
+  );
 
   const handleImageControlChange = (event) => {
     setValues({ ...values, imageProtect: !imageProtect });
@@ -78,7 +81,7 @@ const EditorEditPostComp = ({ post, categories }) => {
       return;
     }
 
-    const { image, title, subtitle, imageProtect } = values;
+    const { image, title, subtitle, imageProtect, description } = values;
 
     if (!validateTitleLength(title) || !validateContentLength(content)) {
       return;
@@ -94,6 +97,7 @@ const EditorEditPostComp = ({ post, categories }) => {
     content && newPost.append("content", content);
     title && newPost.append("title", title);
     subtitle && newPost.append("subtitle", subtitle);
+    description && newPost.append("description", description);
     newPost.append("imageProtect", imageProtect);
 
     const updatePostRequestBody = {
@@ -113,7 +117,7 @@ const EditorEditPostComp = ({ post, categories }) => {
     }
   };
 
-  const { image, title, subtitle, imageProtect } = values;
+  const { image, title, subtitle, imageProtect, description } = values;
 
   return (
     <form onSubmit={onSubmitHandler}>
@@ -213,6 +217,15 @@ const EditorEditPostComp = ({ post, categories }) => {
           type="text"
           fullwidth={true}
           placeholder="Alt Başlık"
+        />
+        <MultilineFormField
+          fieldName="description"
+          value={description}
+          onChange={handleChange("description")}
+          type="text"
+          fullWidth={true}
+          rows={3}
+          placeholder="Tanıtım Metni"
         />
         <div style={{ maxWidth: "100%", margin: "2rem auto" }}>
           <EditorToolbar />

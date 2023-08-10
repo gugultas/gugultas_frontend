@@ -28,6 +28,7 @@ import MainLoadingComp from "../loading/MainLoadingComp";
 import SnackbarMUI from "../snackbar/SnackbarMUI";
 import userInput from "./../../hooks/user.input.hook";
 import { useGetSubCategoriesByCategoryQuery } from "../../features/sub-categories/subCategorySlice";
+import MultilineFormField from "../form/MultilineFormField";
 
 const EditorNewPostComp = () => {
   const navigate = useNavigate();
@@ -80,10 +81,19 @@ const EditorNewPostComp = () => {
     clearHandler: subtitleClearHandler,
   } = userInput();
 
+  const {
+    text: description,
+    shouldDisplayError: descriptionHasError,
+    textChangeHandler: descriptionChangeHandler,
+    inputBlurHandler: descriptionBlurHandler,
+    clearHandler: descriptionClearHandler,
+  } = userInput();
+
   const clearForm = () => {
     photoClearHandler();
     titleClearHandler();
     subtitleClearHandler();
+    descriptionClearHandler();
   };
 
   const onSubmitHandler = async (e) => {
@@ -122,6 +132,7 @@ const EditorNewPostComp = () => {
     content && newPost.append("content", content);
     title && newPost.append("title", title);
     subtitle && newPost.append("subtitle", subtitle);
+    description && newPost.append("description", description);
 
     const resp = await addNewPost(newPost);
 
@@ -248,6 +259,17 @@ const EditorNewPostComp = () => {
           type="text"
           fullwidth={true}
           placeholder="Alt başlık"
+        />
+        <MultilineFormField
+          fieldName="description"
+          value={description}
+          onChange={descriptionChangeHandler}
+          onBlur={descriptionBlurHandler}
+          error={descriptionHasError}
+          helperText="Google için tanıtım giriniz."
+          type="text"
+          fullWidth={true}
+          placeholder="Tanıtım metni"
         />
         <div style={{ maxWidth: "100%", margin: "3rem auto" }}>
           <EditorToolbar />

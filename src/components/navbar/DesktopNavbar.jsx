@@ -34,8 +34,8 @@ import useLogout from "../../hooks/useLogout.hook";
 import { stringAvatar } from "../../utils/CustomProfileImage";
 import { useGetCategoriesQuery } from "../../features/categories/categorySlice";
 import { useGetActiveSubCategoriesByCategoryQuery } from "../../features/sub-categories/subCategorySlice";
-import SearchBar from "./SearchBar";
 import SocialLinksMenu from "../social_media/SocialLinksMenu";
+import SearchBarSpecial from "./SearchBarSpecial";
 
 const pages = [
   { id: 0, pageName: "/posts", navName: "Tüm Yazıları Gör" },
@@ -162,7 +162,7 @@ const DesktopNavbar = () => {
                 {page.navName}
               </Button>
             ))}
-            <SearchBar />
+            <SearchBarSpecial />
           </Box>
 
           <Box

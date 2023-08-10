@@ -6,6 +6,7 @@ import PostCard from "../post-card/PostCard";
 import PostsLoadingComp from "../loading/PostsLoadingComp";
 import { POST_LIMIT_SIZE } from "../../config/constants";
 import { axiosPublic } from "../../axios/publicAxios";
+import MainLoadingComp from "../loading/MainLoadingComp";
 
 const PostListLoadByScrollComp = ({ searchData }) => {
   const theme = useTheme();
@@ -16,8 +17,12 @@ const PostListLoadByScrollComp = ({ searchData }) => {
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(true);
   const [totalPage, setTotalPage] = useState(0);
+  const [pageLoading, setPageLoading] = useState(false);
 
   const getCardData = async () => {
+    if (page === 0) {
+      setPageLoading(true);
+    }
     const res = await fetch(
       `${BASE_URL}${postsApiUrl}?page=${page}&size=${POST_LIMIT_SIZE}`
     );
@@ -39,6 +44,7 @@ const PostListLoadByScrollComp = ({ searchData }) => {
     } else {
       setCard((prev) => [...prev, ...posts]);
     }
+    setPageLoading(false);
     setTotalPage(data?.totalPages);
     setLoading(false);
   };
@@ -74,6 +80,10 @@ const PostListLoadByScrollComp = ({ searchData }) => {
   }, []);
 
   const allData = searchData ? searchData : card;
+
+  if (pageLoading) {
+    return <MainLoadingComp isLoading={pageLoading} />;
+  }
 
   let content;
   if (matches) {
