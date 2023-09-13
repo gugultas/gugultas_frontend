@@ -1,4 +1,4 @@
-import { Grid, IconButton, Stack, useMediaQuery, useTheme } from "@mui/material";
+import { Container, Grid, IconButton, Stack, useMediaQuery, useTheme } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
 import DesktopNavbar from "../components/navbar/DesktopNavbar";
@@ -33,7 +33,7 @@ const MainLayout = ({ children }) => {
   };
 
   return (
-    <Stack>
+    <Container maxWidth="xl">
       {showTopBtn && (
         <IconButton
           onClick={goToTop}
@@ -86,7 +86,7 @@ const MainLayout = ({ children }) => {
           </Stack>
         )}
       </div>
-    </Stack>
+    </Container>
   );
 };
 
